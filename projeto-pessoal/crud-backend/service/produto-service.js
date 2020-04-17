@@ -1,9 +1,5 @@
-const express = require('express')
 const Produto = require('../persistence/dao/produto-dao');
-
-const STATUS_CREATED = 201;
-
-const STATUS_OK = 200;
+const utils = require('../utils/constantes-util');
 
 // inicializa o banco com dados de teste
 function inicializa() {
@@ -15,7 +11,7 @@ function inicializa() {
     new Produto({ 'nome': 'Filé a Parmegiana', 'valor': 18.0, 'tipo': 'Refeição', 'foto': 'https://leianoticias.com.br/wp-content/uploads/Fil%C3%A9-capa.jpg' }).save();
     new Produto({ 'nome': 'Feijoada', 'valor': 35.0, 'tipo': 'Refeição', 'foto': 'https://img.cybercook.com.br/receitas/776/feijoada-623x350.jpeg' }).save();
 
-    return STATUS_CREATED;
+    return utils.STATUS_CREATED;
 
 }
 
@@ -52,7 +48,7 @@ const removerProduto = async (id) => {
 
     produto.remove();
 
-    return STATUS_OK;
+    return utils.STATUS_OK;
 
 };
 

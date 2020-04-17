@@ -1,21 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const service = require('../service/produto-service');
-
-const STATUS_CREATED = 201;
-
-const STATUS_OK = 200;
+const utils = require('../utils/constantes-util');
 
 // cria um produto
-router.post('/produtos', async (req, res) => {
+router.post('/', async (req, res) => {
     const novoProduto = await service.salvarProduto(req.body);
-    res.status(STATUS_CREATED).json(novoProduto);
+    res.status(utils.STATUS_CREATED).json(novoProduto);
 })
 
 // atualiza um produto pelo id
-router.patch('/produtos/:id', async (req, res) => {
+router.patch('/:id', async (req, res) => {
     const produtoAtualizado = await service.editarProduto(req.params.id, req.body);
-    res.status(STATUS_OK).json(produtoAtualizado);
+    res.status(utils.STATUS_OK).json(produtoAtualizado);
 })
 
 
@@ -23,7 +20,7 @@ router.patch('/produtos/:id', async (req, res) => {
 router.get('/inicializa', async (req, res) => {
 
     let response = 0;
-    let mensagem = "";
+    let mensagem = utils.STRING_EMPTY;
 
     let produtos = await service.listarTodos();
 
@@ -33,7 +30,7 @@ router.get('/inicializa', async (req, res) => {
         mensagem = "Massa de Teste Inicializada com Sucesso!";
     }
     else {
-        response = STATUS_OK;
+        response = utils.STATUS_OK;
         mensagem = "Massa de Teste Já Inicializada!";
     }
 
@@ -41,7 +38,7 @@ router.get('/inicializa', async (req, res) => {
 })
 
 // remove um produto
-router.delete('/produtos/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     
     let response = await service.removerProduto(req.params.id);
 
@@ -50,7 +47,7 @@ router.delete('/produtos/:id', async (req, res) => {
 })
 
 // retorna todos os produtos
-router.get('/produtos', async (req, res) => {
+router.get('/', async (req, res) => {
 
     let response = await service.listarTodos();
 
@@ -58,11 +55,11 @@ router.get('/produtos', async (req, res) => {
 
     response.map(doc => produtos.push(doc));
 
-    res.status(200).json(produtos);
+    res.status(utils.STATUS_OK).json(produtos);
 })
 
 // retorna um produto pelo id
-router.get('/produtos/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
 
     try {
 
@@ -70,7 +67,7 @@ router.get('/produtos/:id', async (req, res) => {
 
         if (produto === null) {
 
-            res.status(404).json({ message: 'Nao foi possivel encontrar um produto com o id informado' })
+            res.status(utils.STATUS_NOT_FOUND).json({ message: 'Nao foi possivel encontrar um produto com o id informado' })
 
         }
 
@@ -78,7 +75,7 @@ router.get('/produtos/:id', async (req, res) => {
 
     } catch (err) {
 
-        res.status(500).json({ message: err.message })
+        res.status(utils.STATUS_ERROR_SERVER).json({ message: err.message })
 
     }
 

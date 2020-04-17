@@ -21,7 +21,8 @@ const io = require('socket.io')(http);
 app.use(cors())
 app.use(express.json())
 
-app.use('/', require('./rest/produto-endpoint'));
+app.use('/produtos', require('./rest/produto-endpoint'));
+app.use('/clientes', require('./rest/cliente-endpoint'));
 
 // Inicia o servidor web
 http.listen(5000, () => console.log('Servidor NodeJs Inicializado com Sucesso 😄 '))
