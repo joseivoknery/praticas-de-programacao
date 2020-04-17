@@ -9,6 +9,7 @@ import {
 import Cabecalho from './componentes/cabecalho';
 import Conteudo from './componentes/conteudo';
 import FormProdutos from './componentes/produtos/form';
+import FormClientes from './componentes/clientes/form';
 import ListarProdutos from './componentes/produtos/listar';
 import VisualizarProduto from './componentes/produtos/visualizar';
 import NaoEncontrada from './componentes/naoencontrada';
@@ -21,18 +22,34 @@ function App() {
       <Cabecalho/>
       <Container>
         <Switch>
+
           <Route path="/" exact={true}><Conteudo/></Route>
+
           <Route path="/produtos/" exact={true}>
             <ListarProdutos/>
           </Route>
+
           <Route path="/produtos/novo"><FormProdutos/></Route>
           <Route path="/produtos/editar/:idProduto">
             <FormProdutos/>
           </Route>
+
           <Route path="/produtos/:idProduto">
             <VisualizarProduto/>
           </Route>
+
+
+          <Route path="/clientes/novo"><FormClientes/></Route>
+          <Route path="/clientes/editar/:idCliente">
+            <FormClientes/>
+          </Route>
+
+          <Route path="/clientes/:idCliente">
+            <VisualizarProduto/>
+          </Route>
+
           <Route path="*"><NaoEncontrada/></Route>
+
         </Switch>
       </Container>
     </Router>

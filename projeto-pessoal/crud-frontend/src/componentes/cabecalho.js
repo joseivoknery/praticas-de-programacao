@@ -14,15 +14,28 @@ function Cabecalho() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
+
           <LinkContainer to="/">
-            <Nav.Link>Início</Nav.Link>
+            <Nav.Link>Início
+            </Nav.Link>
           </LinkContainer>
+
           <LinkContainer to="/produtos">
             <Nav.Link>Produtos</Nav.Link>
           </LinkContainer>
+
           <LinkContainer to="/produtos/novo">
             <Nav.Link>Novo Produto</Nav.Link>
           </LinkContainer>
+
+          <LinkContainer to="/clientes">
+            <Nav.Link>Clientes</Nav.Link>
+          </LinkContainer>
+
+          <LinkContainer to="/clientes/novo">
+            <Nav.Link>Novo Cliente</Nav.Link>
+          </LinkContainer>
+
         </Nav>
       </Navbar.Collapse>
     </Navbar>
