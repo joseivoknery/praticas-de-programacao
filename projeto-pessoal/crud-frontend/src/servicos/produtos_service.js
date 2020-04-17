@@ -1,12 +1,5 @@
 var axios = require('axios');
-
-const environments = {
-
-  localhost: 'http://localhost:5000',
-  produtos: '/produtos/',
-  inicializa: '/inicializa'
-
-}
+const environments = require('../utils/environments');
 
 // Implementação das funções CRUD
 const getProdutos = async () => {

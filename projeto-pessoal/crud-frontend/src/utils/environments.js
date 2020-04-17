@@ -5,4 +5,6 @@ const environments = {
     inicializa: '/inicializa',
     clientes: '/clientes/'
   
-  }
+}
+
+module.exports = environments;
