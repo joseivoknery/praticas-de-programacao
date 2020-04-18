@@ -16,6 +16,8 @@
  - Instruções presentes no arquivo README:: ./projeto-catao/README.md
 ### projeto-pessoal
  - Pasta de contém o item de 3 pontos da Avaliação
+ - Contem um bug depois que edita a venda para cliente que deixa o valor total null
+    por isso até esta hora kk 01:00
  - Instruções presentes no arquivo README:: ./projeto-pessoal/README.md
 ### print-docker
  - Pasta de contém o item de 1 ponto da Avaliação
