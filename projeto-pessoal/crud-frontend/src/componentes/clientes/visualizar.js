@@ -20,10 +20,10 @@ function VisualizarClientes() {
 
   const formataDinheiro = (valor) => {
     if (valor !== undefined) {
-      return 'R$ ' + parseFloat(valor).toFixed(2).replace('.',',');
+      return 'R$ ' + parseFloat(valor).toFixed(2);
     }
     
-    return 'R$ 0,00';
+    return 'R$ 0.00';
   };
   
   const removerCliente = (evento, id) => {
@@ -39,7 +39,7 @@ function VisualizarClientes() {
       <Card.Body>
         <Card.Title>{cliente.nome}</Card.Title>
         <Card.Text>
-          Valor total da Compra R$: {formataDinheiro(cliente.valorCompra)}
+          Valor total da Compra: {formataDinheiro(cliente.valorCompra)}
         </Card.Text>
       </Card.Body>
       <Card.Body>

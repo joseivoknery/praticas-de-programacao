@@ -13,43 +13,56 @@ function FormClientes() {
     return {
       nome: '',
       cpf: '',
-      valorCompra: 0,
+      valorCompra: 0.0,
       produtos: []
     };
   };
 
+  let totalCompraNova = 0.0;
+  let totalCompraAntiga = 0.0;
   const [form, setForm] = useState(criaFormEmBranco());
   const [produtosShow, setProdutosShow] = useState([]);
-  const [produtosCompra, setProdutosCompra] = useState([]);
+  let produtosCompra = [];
   const { idCliente } = useParams();
   const history = useHistory();
 
   useEffect(() => {
     if (idCliente !== undefined) {
       ClientesService.getCliente(idCliente).then((cliente) => {
-        setProdutosCompra(...produtosCompra, cliente.produtos);
         setForm(cliente);
       });
     }
   }, [idCliente]);
+
+
+if(form.produtos !== []){
+
+  const setAtuais = (f) =>{
+    produtosCompra.push(f);
+    totalCompraAntiga += f.valorCompra;
+  };
+
+ form.produtos.map(setAtuais);
+
+}
 
   useEffect(() => {
 
     ProdutosService.getProdutos().then((produtos) => {
       setProdutosShow(produtos);
     });
-    
+
   }, []);
 
   const setValor = (evento, campo) => {
     setForm({ ...form, [campo]: evento.target.value });
   };
 
-  let totalCompra = 0.0;
+  
 
   const setProduto = (produto) => {
-    totalCompra += produto.valor
-    setProdutosCompra(produto);
+    totalCompraNova += produto.valor
+    produtosCompra.push(produto);
   };
 
   const submeter = (evento) => {
@@ -57,7 +70,7 @@ function FormClientes() {
 
     form.produtos = produtosCompra;
 
-    form.valorCompra = totalCompra;
+    form.valorCompra = totalCompraAntiga + totalCompraNova;
 
     if (idCliente === undefined) {
       ClientesService.adicionarCliente(form, () => {
@@ -105,7 +118,7 @@ function FormClientes() {
         <Form.Label>Lista de Produtos</Form.Label>
 
         <div className="listaDeProdutos">
-            { produtosShow.map(renderProduto) }
+          {produtosShow.map(renderProduto)}
         </div>
 
         {/* <Form.Control type="list-group" placeholder="Lista de Produtos da Compra" value={form.produtos} onChange={(e) => setValor(e, 'produtos')} /> */}
