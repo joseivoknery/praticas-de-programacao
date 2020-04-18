@@ -45,7 +45,7 @@ const getClienteById = async (id) => {
 
             response.status = utils.STATUS_NOT_FOUND;
 
-            response.mensagem = 'Nao foi possivel encontrar um produto com o id informado'
+            response.mensagem = 'Nao foi possivel encontrar um cliente com o id informado'
 
         } else {
 
@@ -70,26 +70,36 @@ const getClienteById = async (id) => {
 
 const listarTodos = async () => {
 
-    let clientes = await Cliente.find();
+    try {
 
-    if (clientes.length > 0) {
+        let clientes = await Cliente.find();
 
-        let body = []
+        if (clientes.length > 0) {
 
-        body.map(doc => clientes.push(doc));
+            let body = []
 
-        response.mensagem = "Clientes Encontrados";
+            clientes.map(doc => body.push(doc));
 
-        response.status = utils.STATUS_OK;
+            response.mensagem = "Clientes Encontrados";
 
-        response.body = body;
+            response.status = utils.STATUS_OK;
 
+            response.body = body;
+
+        }
+        else {
+
+            response.mensagem = "Nenhum Cliente Encontrado!";
+
+            response.status = utils.STATUS_NOT_FOUND;
+
+        }
     }
-    else {
+    catch (err) {
 
-        response.mensagem = "Nenhum Cliente Encontrado!";
+        response.status = utils.STATUS_ERROR_SERVER;
 
-        response.status = utils.STATUS_OK;
+        response.mensagem = "Erro de Servidor - Contate o ADM!";
 
     }
 

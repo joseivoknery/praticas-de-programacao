@@ -1,5 +1,6 @@
 const Produto = require('../persistence/dao/produto-dao');
 const utils = require('../utils/constantes-util');
+const response = require('../utils/response');
 
 // inicializa o banco com dados de teste
 function inicializa() {
@@ -16,7 +17,16 @@ function inicializa() {
 }
 
 const salvarProduto = async (produto) => {
-    return await new Produto(produto).save();
+    
+    await new Produto(produto).save();
+
+    response.mensagem = "O Produto foi Cadastrado com Sucesso!";
+
+    response.status = utils.STATUS_CREATED;
+
+    response.body = produto;
+
+    return response;
 }
 
 const editarProduto = async (id, produto) => {
@@ -28,18 +38,88 @@ const editarProduto = async (id, produto) => {
     entity.tipo = produto.tipo;
     entity.foto = produto.foto;
 
-    return await entity.save();
+    await entity.save();
+
+    response.mensagem = "Edição realizada com Sucesso!";
+
+    response.status = utils.STATUS_OK;
+
+    response.body = produto;
+
+    return response;
 }
 
 const getProdutoById = async (id) => {
 
-    let produto = await Produto.findById(id);
+    try {
 
-    return produto;
+        let produto = await Produto.findById(id);
+
+        if (produto === null) {
+
+            response.status = utils.STATUS_NOT_FOUND;
+
+            response.mensagem = 'Nao foi possivel encontrar um produto com o id informado'
+
+        } else {
+
+            response.status = utils.STATUS_OK;
+
+            response.mensagem = "Produto " + produto.nome + " Encontrado";
+
+            response.body = produto;
+
+        }
+
+    } catch (err) {
+
+        response.status = utils.STATUS_ERROR_SERVER;
+
+        response.mensagem = "Erro de Servidor - Contate o ADM!";
+
+    }
+
+    return response;
 }
 
 const listarTodos = async () => {
-    return await Produto.find();
+
+    try {
+
+        let produtos = await Produto.find();
+
+        if (produtos.length > 0) {
+
+            let body = []
+
+            produtos.map(doc => body.push(doc));
+
+            response.mensagem = "Produtos Encontrados";
+
+            response.status = utils.STATUS_OK;
+
+            response.body = body;
+
+        }
+        else {
+
+            response.mensagem = "Nenhum Produto Encontrado!";
+
+            response.status = utils.STATUS_NOT_FOUND;
+
+        }
+    }
+    catch (err) {
+
+        response.status = utils.STATUS_ERROR_SERVER;
+
+        response.mensagem = "Erro de Servidor - Contate o ADM!";
+
+    }
+
+    return response;
+
+
 }
 
 const removerProduto = async (id) => {
@@ -48,7 +128,11 @@ const removerProduto = async (id) => {
 
     produto.remove();
 
-    return utils.STATUS_OK;
+    response.mensagem = "O Produto foi removido!";
+
+    response.status = utils.STATUS_OK;
+
+    return response;
 
 };
 
