@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from "react-router-dom";
-//import ProdutosService from '../../servicos/produtos_service';
+import ProdutosService from '../../servicos/produtos_service';
 import ClientesService from '../../servicos/clientes_service';
 
 import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
 function FormClientes() {
@@ -18,6 +19,8 @@ function FormClientes() {
   };
 
   const [form, setForm] = useState(criaFormEmBranco());
+  const [produtosShow, setProdutosShow] = useState([]);
+  const [produtosCompra, setProdutosCompra] = useState([]);
   const { idCliente } = useParams();
   const history = useHistory();
 
@@ -29,12 +32,27 @@ function FormClientes() {
     }
   }, [idCliente]);
 
+  useEffect(() => {
+
+    ProdutosService.getProdutos().then((produtos) => {
+      setProdutosShow(produtos);
+    });
+    
+  }, []);
+
   const setValor = (evento, campo) => {
     setForm({ ...form, [campo]: evento.target.value });
   };
 
+  const setProduto = (produto) => {
+    setProdutosCompra(produto);
+  };
+
   const submeter = (evento) => {
     evento.preventDefault();
+
+    form.produtos = produtosCompra;
+
     if (idCliente === undefined) {
       ClientesService.adicionarCliente(form, () => {
         history.push('/clientes');
@@ -46,6 +64,20 @@ function FormClientes() {
     }
   };
 
+  const renderProduto = (produto) => {
+    return (
+      <Card className="produto">
+        <Card.Img variant="top" src={produto.foto} />
+        <Card.Body>
+          <Card.Title>{produto.nome} - R$:{produto.valor} </Card.Title>
+          <Card.Link onClick={() => setProduto(produto)}>
+            <Button variant="primary" block>Escolher Produto</Button>
+          </Card.Link>
+        </Card.Body>
+      </Card>
+    );
+  };
+
   return (
     <Form onSubmit={(e) => submeter(e)}>
       <Form.Group controlId="campoNome">
@@ -53,7 +85,7 @@ function FormClientes() {
         <Form.Control type="text" placeholder="Nome do Cliente" value={form.nome} onChange={(e) => setValor(e, 'nome')} />
       </Form.Group>
 
-      <Form.Group controlId="campoTipo">
+      <Form.Group controlId="campoCpf">
         <Form.Label>Cpf do Cliente</Form.Label>
         <Form.Control type="text" placeholder="Cpf do Cliente" value={form.cpf} onChange={(e) => setValor(e, 'cpf')} />
       </Form.Group>
@@ -65,7 +97,12 @@ function FormClientes() {
 
       <Form.Group controlId="campoListaProdutos">
         <Form.Label>Lista de Produtos</Form.Label>
-        <Form.Control type="datalist" placeholder="Foto" value={form.produtos} onChange={(e) => setValor(e, 'produtos')} />
+
+        <div className="listaDeProdutos">
+            { produtosShow.map(renderProduto) }
+        </div>
+
+        {/* <Form.Control type="list-group" placeholder="Lista de Produtos da Compra" value={form.produtos} onChange={(e) => setValor(e, 'produtos')} /> */}
       </Form.Group>
 
       <Button variant="primary" type="submit">

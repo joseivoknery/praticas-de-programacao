@@ -42,7 +42,7 @@ router.delete('/:id', async (req, res) => {
     
     let response = await service.removerProduto(req.params.id);
 
-    res.status(response).send("teste de exclusao");
+    res.status(response).send("O Produto:");
 
 })
 
