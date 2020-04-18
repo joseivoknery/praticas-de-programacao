@@ -13,12 +13,10 @@ function FormClientes() {
     return {
       nome: '',
       cpf: '',
-      valorCompra: '',
+      valorCompra: 0,
       produtos: []
     };
   };
-
-  let totalCompra = 0.0;
 
   const [form, setForm] = useState(criaFormEmBranco());
   const [produtosShow, setProdutosShow] = useState([]);
@@ -47,7 +45,6 @@ function FormClientes() {
   };
 
   const setProduto = (produto) => {
-    totalCompra += produto.valor;
     setProdutosCompra(produto);
   };
 
@@ -55,8 +52,6 @@ function FormClientes() {
     evento.preventDefault();
 
     form.produtos = produtosCompra;
-
-    form.valorCompra = totalCompra;
 
     if (idCliente === undefined) {
       ClientesService.adicionarCliente(form, () => {
