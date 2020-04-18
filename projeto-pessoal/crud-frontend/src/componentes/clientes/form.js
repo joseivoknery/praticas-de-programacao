@@ -18,6 +18,8 @@ function FormClientes() {
     };
   };
 
+  let totalCompra = 0.0;
+
   const [form, setForm] = useState(criaFormEmBranco());
   const [produtosShow, setProdutosShow] = useState([]);
   const [produtosCompra, setProdutosCompra] = useState([]);
@@ -45,6 +47,7 @@ function FormClientes() {
   };
 
   const setProduto = (produto) => {
+    totalCompra += produto.valor;
     setProdutosCompra(produto);
   };
 
@@ -52,6 +55,8 @@ function FormClientes() {
     evento.preventDefault();
 
     form.produtos = produtosCompra;
+
+    form.valorCompra = totalCompra;
 
     if (idCliente === undefined) {
       ClientesService.adicionarCliente(form, () => {
@@ -90,10 +95,10 @@ function FormClientes() {
         <Form.Control type="text" placeholder="Cpf do Cliente" value={form.cpf} onChange={(e) => setValor(e, 'cpf')} />
       </Form.Group>
 
-      <Form.Group controlId="campoPreco">
+      {/* <Form.Group controlId="campoPreco">
         <Form.Label>Valor da Compra</Form.Label>
         <Form.Control type="number" min="0" step="0.01" value={form.valorCompra} onChange={(e) => setValor(e, 'valorCompra')} />
-      </Form.Group>
+      </Form.Group> */}
 
       <Form.Group controlId="campoListaProdutos">
         <Form.Label>Lista de Produtos</Form.Label>
