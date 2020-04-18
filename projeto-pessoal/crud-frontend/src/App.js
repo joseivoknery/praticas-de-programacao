@@ -12,6 +12,8 @@ import FormProdutos from './componentes/produtos/form';
 import FormClientes from './componentes/clientes/form';
 import ListarProdutos from './componentes/produtos/listar';
 import VisualizarProduto from './componentes/produtos/visualizar';
+import ListarClientes from './componentes/clientes/listar';
+import VisualizarClientes from './componentes/clientes/visualizar';
 import NaoEncontrada from './componentes/naoencontrada';
 
 import Container from 'react-bootstrap/Container';
@@ -38,6 +40,9 @@ function App() {
             <VisualizarProduto/>
           </Route>
 
+          <Route path="/clientes/" exact={true}>
+            <ListarClientes/>
+          </Route>
 
           <Route path="/clientes/novo"><FormClientes/></Route>
           <Route path="/clientes/editar/:idCliente">
@@ -45,7 +50,7 @@ function App() {
           </Route>
 
           <Route path="/clientes/:idCliente">
-            <VisualizarProduto/>
+            <VisualizarClientes/>
           </Route>
 
           <Route path="*"><NaoEncontrada/></Route>

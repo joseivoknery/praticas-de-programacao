@@ -1,22 +1,22 @@
 import React, {useState, useEffect} from 'react';
 import { useParams, useHistory } from "react-router-dom";
-import ProdutosService from '../../servicos/produtos_service';
+import ClientesService from '../../servicos/clientes_service';
 
 import { LinkContainer } from 'react-router-bootstrap';
 import Card from 'react-bootstrap/Card';
 
-function VisualizarProduto() {
-  const {idProduto} = useParams();
+function VisualizarClientes() {
+  const {idCliente} = useParams();
   const history = useHistory();
-  const [produto, setProduto] = useState({});
+  const [cliente, setCliente] = useState({});
 
   useEffect(() => {
 
-    ProdutosService.getProduto(idProduto).then((produto) => {
-      setProduto(produto);
+    ClientesService.getClientes(idCliente).then((cliente) => {
+      setCliente(cliente);
     });
 
-  }, [idProduto]);
+  }, [idCliente]);
 
   const formataDinheiro = (valor) => {
     if (valor !== undefined) {
@@ -26,30 +26,30 @@ function VisualizarProduto() {
     return 'R$ 0,00';
   };
   
-  const removerProduto = (evento, id) => {
+  const removerCliente = (evento, id) => {
     evento.preventDefault();
-    ProdutosService.removerProduto(id, () => {
-      history.push('/produtos');
+    ClientesService.removerCliente(id, () => {
+      history.push('/clientes');
     });
   };
 
   return (
     <Card className="detalheProduto">
-      <Card.Img variant="top" src={produto.foto} alt="Foto do Produto" />
+      {/* <Card.Img variant="top" src={produto.foto} alt="Foto do Produto" /> */}
       <Card.Body>
-        <Card.Title>{produto.nome}</Card.Title>
+        <Card.Title>{cliente.nome}</Card.Title>
         <Card.Text>
-          Preço: {formataDinheiro(produto.valor)}
+          Valor total da Compra: {formataDinheiro(cliente.valorCompra)}
         </Card.Text>
       </Card.Body>
       <Card.Body>
-        <LinkContainer to={'/produtos/editar/' + produto._id}>
+        <LinkContainer to={'/produtos/editar/' + cliente._id}>
           <Card.Link className="btn btn-primary" href="#">Editar</Card.Link>
         </LinkContainer>
-        <Card.Link onClick={(e) => removerProduto(e, produto._id)} className="btn btn-danger" href="#">Remover</Card.Link>
+        <Card.Link onClick={(e) => removerCliente(e, cliente._id)} className="btn btn-danger" href="#">Remover</Card.Link>
       </Card.Body>        
     </Card>
   );
 }
 
-export default VisualizarProduto;
+export default VisualizarClientes;

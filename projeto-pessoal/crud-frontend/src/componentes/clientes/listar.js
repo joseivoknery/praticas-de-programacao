@@ -1,29 +1,30 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
-import ProdutosService from '../../servicos/produtos_service';
+//import ProdutosService from '../../servicos/produtos_service';
+import ClientesService from '../../servicos/clientes_service';
 
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-function ListarProdutos() {
-  const [produtos, setProdutos] = useState([]);  
+function ListarClientes() {
+  const [clientes, setClientes] = useState([]);  
 
 useEffect(() => {
 
-  ProdutosService.getProdutos().then((produtos) => {
-    setProdutos(produtos);
+  ClientesService.getClientes().then((clientes) => {
+    setClientes(clientes);
   });
   
 }, []);
 
-  const renderProduto = (produto) => {
+  const renderClientes = (cliente) => {
     return (
-      <Card className="produto">
-        <Card.Img variant="top" src={produto.foto} />
+      <Card className="cliente">
+        {/* <Card.Img variant="top" src={cliente.foto} /> */}
         <Card.Body>
-          <Card.Title>{produto.nome}</Card.Title>
-          <LinkContainer to={"/produtos/" + produto._id}>
+          <Card.Title>{cliente.nome}</Card.Title>
+          <LinkContainer to={"/clientes/" + cliente._id}>
             <Button variant="primary" block>Visualizar</Button>
           </LinkContainer>
         </Card.Body>
@@ -32,10 +33,10 @@ useEffect(() => {
   };
 
   return (
-    <div className="listaDeProdutos">
-      { produtos.map(renderProduto) }
+    <div className="listaDeClientes">
+      { clientes.map(renderClientes) }
     </div>
   );
 }
 
-export default ListarProdutos;
+export default ListarClientes;
