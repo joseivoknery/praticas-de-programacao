@@ -44,7 +44,9 @@ function FormClientes() {
     setForm({ ...form, [campo]: evento.target.value });
   };
 
+  let totalCompra = 0.0;
   const setProduto = (produto) => {
+    totalCompra += produto.valor
     setProdutosCompra(produto);
   };
 
@@ -52,6 +54,8 @@ function FormClientes() {
     evento.preventDefault();
 
     form.produtos = produtosCompra;
+
+    form.valorCompra = totalCompra;
 
     if (idCliente === undefined) {
       ClientesService.adicionarCliente(form, () => {

@@ -29,8 +29,6 @@ const removerCliente = async (id, callback) => {
 
 const adicionarCliente = async (cliente, callback) => {
 
-  console.log(cliente);
-
   await axios.post(environments.localhost + environments.clientes, cliente);
 
   callback();
