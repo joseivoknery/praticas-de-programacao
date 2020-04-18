@@ -27,7 +27,8 @@ function FormClientes() {
   useEffect(() => {
     if (idCliente !== undefined) {
       ClientesService.getCliente(idCliente).then((cliente) => {
-        setForm(cliente)
+        setProdutosCompra(...produtosCompra, cliente.produtos);
+        setForm(cliente);
       });
     }
   }, [idCliente]);
@@ -45,6 +46,7 @@ function FormClientes() {
   };
 
   let totalCompra = 0.0;
+
   const setProduto = (produto) => {
     totalCompra += produto.valor
     setProdutosCompra(produto);
@@ -96,7 +98,7 @@ function FormClientes() {
 
       {/* <Form.Group controlId="campoPreco">
         <Form.Label>Valor da Compra</Form.Label>
-        <Form.Control type="number" min="0" step="0.01" value={form.valorCompra} onChange={(e) => setValor(e, 'valorCompra')} />
+        <Form.Control type="number" min="0" step="0.01" value={totalCompra} onChange={(e) => setValor(e, totalCompra)} />
       </Form.Group> */}
 
       <Form.Group controlId="campoListaProdutos">

@@ -21,7 +21,7 @@ router.get('/inicializa', async (req, res) => {
 
     let response = await service.listarTodos();
 
-    if (produtos === null || produtos.length === 0) {
+    if (response.body === null || response.body.length === 0) {
 
         response.status = await service.inicializa();
         response.mensagem = "Massa de Teste Inicializada com Sucesso!";
