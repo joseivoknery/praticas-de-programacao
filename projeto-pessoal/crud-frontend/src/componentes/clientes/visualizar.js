@@ -12,7 +12,7 @@ function VisualizarClientes() {
 
   useEffect(() => {
 
-    ClientesService.getClientes(idCliente).then((cliente) => {
+    ClientesService.getCliente(idCliente).then((cliente) => {
       setCliente(cliente);
     });
 
@@ -39,11 +39,11 @@ function VisualizarClientes() {
       <Card.Body>
         <Card.Title>{cliente.nome}</Card.Title>
         <Card.Text>
-          Valor total da Compra: {formataDinheiro(cliente.valorCompra)}
+          Valor total da Compra R$: {formataDinheiro(cliente.valorCompra)}
         </Card.Text>
       </Card.Body>
       <Card.Body>
-        <LinkContainer to={'/produtos/editar/' + cliente._id}>
+        <LinkContainer to={'/clientes/editar/' + cliente._id}>
           <Card.Link className="btn btn-primary" href="#">Editar</Card.Link>
         </LinkContainer>
         <Card.Link onClick={(e) => removerCliente(e, cliente._id)} className="btn btn-danger" href="#">Remover</Card.Link>

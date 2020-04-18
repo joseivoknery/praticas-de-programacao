@@ -6,7 +6,7 @@ const getProdutos = async () => {
   
   let response = await axios.get(environments.localhost + environments.produtos);
 
-  return response.data;
+  return response.data.body;
   
 };
 
@@ -14,7 +14,7 @@ const getProduto = async (idProduto) => {
 
   let response = await axios.get(environments.localhost + environments.produtos + idProduto);
 
-  return response.data;
+  return response.data.body;
 };
 
 const removerProduto = async (id, callback) => {

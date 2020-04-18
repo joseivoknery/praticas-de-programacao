@@ -6,7 +6,9 @@ const getClientes = async () => {
   
   let response = await axios.get(environments.localhost + environments.clientes);
 
-  return response.data;
+  console.log(response);
+
+  return response.data.body;
   
 };
 
@@ -14,7 +16,7 @@ const getCliente = async (idCliente) => {
 
   let response = await axios.get(environments.localhost + environments.clientes + idCliente);
 
-  return response.data;
+  return response.data.body;
 };
 
 const removerCliente = async (id, callback) => {
