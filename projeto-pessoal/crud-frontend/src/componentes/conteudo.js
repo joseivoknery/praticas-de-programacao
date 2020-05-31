@@ -1,9 +1,10 @@
 import React from 'react';
 import Jumbotron from 'react-bootstrap/Jumbotron';
-import style from './conteudo.css';
+import style from './conteudo.module.css';
 
 function Conteudo() {
 
+  
   return (
     <Jumbotron>
       <h1 className={style.titulo}>Integração entre Backend e Frontend</h1>
