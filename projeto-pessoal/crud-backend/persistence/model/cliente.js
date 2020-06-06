@@ -1,10 +1,8 @@
-const produto = require('./produto');
-const user = require('./user');
-
 module.exports = {
-    nome: String,
-    cpf: String,
-    valorCompra: Number,
-    produtos: [produto],
-    login: user
+      nome: String,
+      cpf: String,
+      user: String,
+      senha: String,
+      foto: String,
+      endereco: String
 }
