@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const service = require('../service/cliente-service');
-const utils = require('../utils/constantes-util');
 
 
 // cria um cliente
