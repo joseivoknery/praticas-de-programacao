@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from "react-router-dom";
-import ProdutosService from '../../servicos/produtos_service';
-import ClientesService from '../../servicos/clientes_service';
-
-import Form from 'react-bootstrap/Form';
-import Card from 'react-bootstrap/Card';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
+import { useHistory, useParams } from "react-router-dom";
+import ClientesService from '../../servicos/clientes_service';
+import ProdutosService from '../../servicos/produtos_service';
+
 
 function FormClientes() {
 
@@ -14,7 +14,12 @@ function FormClientes() {
       nome: '',
       cpf: '',
       valorCompra: 0.0,
-      produtos: []
+      produtos: [],
+      foto: '',
+      login:{
+        user: '',
+        senha: ''
+      }
     };
   };
 
