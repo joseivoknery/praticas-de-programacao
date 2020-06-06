@@ -6,6 +6,5 @@ module.exports = {
     cpf: String,
     valorCompra: Number,
     produtos: [produto],
-    foto: String,
     login: user
 }

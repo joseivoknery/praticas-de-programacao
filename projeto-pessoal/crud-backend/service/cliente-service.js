@@ -23,6 +23,7 @@ const editarCliente = async (id, cliente) => {
     entity.cpf = cliente.cpf;
     entity.valorCompra = cliente.valorCompra;
     entity.produtos = cliente.produtos;
+    entity.login = cliente.login;
 
     await entity.save();
 

@@ -15,10 +15,10 @@ function FormClientes() {
       cpf: '',
       valorCompra: 0.0,
       produtos: [],
-      foto: '',
       login:{
         user: '',
-        senha: ''
+        senha: '',
+        foto: ''
       }
     };
   };
