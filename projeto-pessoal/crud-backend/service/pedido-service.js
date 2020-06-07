@@ -1,5 +1,5 @@
 const Pedido = require('../persistence/dao/pedido-dao');
-const utils = require('../utils/constantes-util');
+const http_status = require('../utils/http-status');
 const response = require('../utils/response');
 
 const salvarPedido = async (pedido) => {
@@ -9,7 +9,7 @@ const salvarPedido = async (pedido) => {
 
     response.mensagem = "O Pedido foi realizado com Sucesso!";
 
-    response.status = utils.STATUS_CREATED;
+    response.status = http_status.STATUS_CREATED;
 
     response.body = pedido;
 
@@ -29,7 +29,7 @@ const editarPedido = async (id, pedido) => {
 
     response.mensagem = "Pedido editado com Sucesso!";
 
-    response.status = utils.STATUS_OK;
+    response.status = http_status.STATUS_OK;
 
     response.body = pedido;
 
@@ -44,13 +44,13 @@ const getPedidoById = async (id) => {
 
         if (pedido === null) {
 
-            response.status = utils.STATUS_NOT_FOUND;
+            response.status = http_status.STATUS_NOT_FOUND;
 
             response.mensagem = 'Nao foi possivel encontrar um Pedido com o id informado'
 
         } else {
 
-            response.status = utils.STATUS_OK;
+            response.status = http_status.STATUS_OK;
 
             response.mensagem = "Pedido " + pedido.nome + " Encontrado";
 
@@ -60,7 +60,7 @@ const getPedidoById = async (id) => {
 
     } catch (err) {
 
-        response.status = utils.STATUS_ERROR_SERVER;
+        response.status = http_status.STATUS_ERROR_SERVER;
 
         response.mensagem = "Erro de Servidor - Contate o ADM!";
 
@@ -83,7 +83,7 @@ const listarTodos = async () => {
 
             response.mensagem = "Pedidos Encontrados";
 
-            response.status = utils.STATUS_OK;
+            response.status = http_status.STATUS_OK;
 
             response.body = body;
 
@@ -92,13 +92,13 @@ const listarTodos = async () => {
 
             response.mensagem = "Nenhum Pedido Encontrado!";
 
-            response.status = utils.STATUS_NOT_FOUND;
+            response.status = http_status.STATUS_NOT_FOUND;
 
         }
     }
     catch (err) {
 
-        response.status = utils.STATUS_ERROR_SERVER;
+        response.status = http_status.STATUS_ERROR_SERVER;
 
         response.mensagem = "Erro de Servidor - Contate o ADM!";
 
@@ -115,7 +115,7 @@ const removerPedido = async (id) => {
 
     response.mensagem = "O Pedido foi removido!";
 
-    response.status = utils.STATUS_OK;
+    response.status = http_status.STATUS_OK;
 
     return response;
 

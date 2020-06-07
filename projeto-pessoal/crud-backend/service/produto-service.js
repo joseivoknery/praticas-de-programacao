@@ -1,5 +1,5 @@
 const Produto = require('../persistence/dao/produto-dao');
-const utils = require('../utils/constantes-util');
+const http_status = require('../utils/http-status');
 const response = require('../utils/response');
 
 // inicializa o banco com dados de teste
@@ -22,7 +22,7 @@ const salvarProduto = async (produto) => {
 
     response.mensagem = "O Produto foi Cadastrado com Sucesso!";
 
-    response.status = utils.STATUS_CREATED;
+    response.status = http_status.STATUS_CREATED;
 
     response.body = produto;
 
@@ -42,7 +42,7 @@ const editarProduto = async (id, produto) => {
 
     response.mensagem = "Edição realizada com Sucesso!";
 
-    response.status = utils.STATUS_OK;
+    response.status = http_status.STATUS_OK;
 
     response.body = produto;
 
@@ -57,13 +57,13 @@ const getProdutoById = async (id) => {
 
         if (produto === null) {
 
-            response.status = utils.STATUS_NOT_FOUND;
+            response.status = http_status.STATUS_NOT_FOUND;
 
             response.mensagem = 'Nao foi possivel encontrar um produto com o id informado'
 
         } else {
 
-            response.status = utils.STATUS_OK;
+            response.status = http_status.STATUS_OK;
 
             response.mensagem = "Produto " + produto.nome + " Encontrado";
 
@@ -73,7 +73,7 @@ const getProdutoById = async (id) => {
 
     } catch (err) {
 
-        response.status = utils.STATUS_ERROR_SERVER;
+        response.status = http_status.STATUS_ERROR_SERVER;
 
         response.mensagem = "Erro de Servidor - Contate o ADM!";
 
@@ -96,7 +96,7 @@ const listarTodos = async () => {
 
             response.mensagem = "Produtos Encontrados";
 
-            response.status = utils.STATUS_OK;
+            response.status = http_status.STATUS_OK;
 
             response.body = body;
 
@@ -105,13 +105,13 @@ const listarTodos = async () => {
 
             response.mensagem = "Nenhum Produto Encontrado!";
 
-            response.status = utils.STATUS_NOT_FOUND;
+            response.status = http_status.STATUS_NOT_FOUND;
 
         }
     }
     catch (err) {
 
-        response.status = utils.STATUS_ERROR_SERVER;
+        response.status = http_status.STATUS_ERROR_SERVER;
 
         response.mensagem = "Erro de Servidor - Contate o ADM!";
 
@@ -130,7 +130,7 @@ const removerProduto = async (id) => {
 
     response.mensagem = "O Produto foi removido!";
 
-    response.status = utils.STATUS_OK;
+    response.status = http_status.STATUS_OK;
 
     return response;
 

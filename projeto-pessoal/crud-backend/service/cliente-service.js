@@ -1,5 +1,5 @@
 const Cliente = require('../persistence/dao/cliente-dao');
-const utils = require('../utils/constantes-util');
+const http_status = require('../utils/http-status');
 const response = require('../utils/response');
 
 const salvarCliente = async (cliente) => {
@@ -8,7 +8,7 @@ const salvarCliente = async (cliente) => {
 
     response.mensagem = "O Cliente foi Cadastrado com Sucesso!";
 
-    response.status = utils.STATUS_CREATED;
+    response.status = http_status.STATUS_CREATED;
 
     response.body = cliente;
 
@@ -29,7 +29,7 @@ const editarCliente = async (id, cliente) => {
 
     response.mensagem = "Edição realizada com Sucesso!";
 
-    response.status = utils.STATUS_OK;
+    response.status = http_status.STATUS_OK;
 
     response.body = cliente;
 
@@ -44,13 +44,13 @@ const getClienteById = async (id) => {
 
         if (cliente === null) {
 
-            response.status = utils.STATUS_NOT_FOUND;
+            response.status = http_status.STATUS_NOT_FOUND;
 
             response.mensagem = 'Nao foi possivel encontrar um cliente com o id informado'
 
         } else {
 
-            response.status = utils.STATUS_OK;
+            response.status = http_status.STATUS_OK;
 
             response.mensagem = "Cliente " + cliente.nome + " Encontrado";
 
@@ -60,7 +60,7 @@ const getClienteById = async (id) => {
 
     } catch (err) {
 
-        response.status = utils.STATUS_ERROR_SERVER;
+        response.status = http_status.STATUS_ERROR_SERVER;
 
         response.mensagem = "Erro de Servidor - Contate o ADM!";
 
@@ -83,7 +83,7 @@ const listarTodos = async () => {
 
             response.mensagem = "Clientes Encontrados";
 
-            response.status = utils.STATUS_OK;
+            response.status = http_status.STATUS_OK;
 
             response.body = body;
 
@@ -92,13 +92,13 @@ const listarTodos = async () => {
 
             response.mensagem = "Nenhum Cliente Encontrado!";
 
-            response.status = utils.STATUS_NOT_FOUND;
+            response.status = http_status.STATUS_NOT_FOUND;
 
         }
     }
     catch (err) {
 
-        response.status = utils.STATUS_ERROR_SERVER;
+        response.status = http_status.STATUS_ERROR_SERVER;
 
         response.mensagem = "Erro de Servidor - Contate o ADM!";
 
@@ -115,7 +115,7 @@ const removerCliente = async (id) => {
 
     response.mensagem = "O Cliente foi removido!";
 
-    response.status = utils.STATUS_OK;
+    response.status = http_status.STATUS_OK;
 
     return response;
 
