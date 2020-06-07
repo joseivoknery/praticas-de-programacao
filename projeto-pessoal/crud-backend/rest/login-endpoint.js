@@ -2,6 +2,13 @@ const express = require('express');
 const router = express.Router();
 const service = require('../service/login-service');
 
+
+// realizar cadastro de um novo usuário no sistema
+router.post('/signup', async (req, res) => {
+  const response = await service.singUp(req.body);
+  res.status(response.status).json(response);
+})
+
 // realizar login no sistema
 router.post('/', async (req, res) => {
   const response = await service.login(req.body);
@@ -15,9 +22,10 @@ router.get('/', async (req, res) => {
 });
 
 // verifica se o token é valido
-router.get('/valida-token', (req, res, next) => {
-  const response = service.validarToken(req, res, next);
-  res.status(response.status).json(response);
+router.head('/private', service.validarToken, (req, res, next) => {
+  res.status(req.body.status);
 });
+
+
 
 module.exports = router;

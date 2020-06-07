@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const service = require('../service/cliente-service');
 
-
 // cria um cliente
 router.post('/', async (req, res) => {
     const response = await service.salvarCliente(req.body);
