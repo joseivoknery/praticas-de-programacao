@@ -10,7 +10,7 @@ const api = require('../server');
 const BCRYPT_SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS);
 
 
-const singUp = async (body) => {
+const singUp = async (body, acesso) => {
   body.senha = await bcrypt.hash(body.senha, BCRYPT_SALT_ROUNDS);
   await new Usuario(body).save();
   response.mensagem = "O Usuario foi Cadastrado com Sucesso!";
