@@ -17,29 +17,20 @@ router.patch('/:id', async (req, res) => {
 
 // retorna um cliente pelo id
 router.get('/:id', async (req, res) => {
-
     let response = await service.getClienteById(req.params.id);
-
     res.status(response.status).json(response);
-
 });
 
 // remove um cliente
 router.delete('/:id', async (req, res) => {
-
     let response = await service.removerCliente(req.params.id);
-
     res.status(response.status).json(response);
-
 })
 
 // retorna todos os clientes
 router.get('/', async (req, res) => {
-
     let response = await service.listarTodos();
-
     res.status(response.status).json(response);
 })
-
 
 module.exports = router;

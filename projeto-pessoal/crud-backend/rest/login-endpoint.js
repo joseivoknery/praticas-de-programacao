@@ -8,6 +8,7 @@ router.post('/', async (req, res) => {
   res.status(response.status).json(response);
 })
 
+// realizar logout no sistema
 router.get('/', async (req, res) => {
   const response = await service.logout(req.body);
   res.status(response.status).json(response);
