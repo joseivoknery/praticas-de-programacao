@@ -1,5 +1,5 @@
 const produto = require('./produto');
-const cliente = require('./cliente');
+const cliente = require('./usuario');
 
 module.exports = {
     cliente: cliente,

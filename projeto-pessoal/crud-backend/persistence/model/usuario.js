@@ -1,8 +1,10 @@
-const Cliente = require('./cliente');
-
 module.exports = {
-  user: String,
+  nome: String,
+  cpf: String,
+  login: String,
   senha: String,
-  foto: String,
-  cliente: Cliente
+  nivel: String,
+  endereco: String,
+  telefone: String,
+  foto: String
 }

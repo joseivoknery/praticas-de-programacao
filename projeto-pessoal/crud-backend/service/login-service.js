@@ -33,7 +33,7 @@ const logout = async () => {
 
 const login = async (body) => {
 
-  let usuario = await Usuario.findOne({ user: body.user });
+  let usuario = await Usuario.findOne({ login: body.login });
 
   if (!usuario) {
 
