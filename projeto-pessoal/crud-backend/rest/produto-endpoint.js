@@ -14,7 +14,7 @@ router.patch('/:id', async (req, res) => {
     res.status(response.status).json(response);
 })
 
-// retorna todos os produtos
+// inicializa a massa de teste
 router.get('/inicializa', async (req, res) => {
     const response = await service.inicializa();
     res.status(response.status).send(response);
