@@ -6,7 +6,7 @@ const utils = require('../utils/constantes-util');
 const response = require('../utils/response');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const app = require('../server');
+const api = require('../server');
 const BCRYPT_SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS);
 
 
@@ -46,7 +46,10 @@ const login = async (body) => {
 
     let payload = gerarPayload(usuario);
     let token = gerarToken(payload, process.env.SECRET);
-    //Adicionar o acesso aos Endpoints privados aqui
+    
+
+
+
     response.body = security(token);
     response.mensagem = 'Acesso Permitido';
     response.status = http_status.STATUS_OK;
