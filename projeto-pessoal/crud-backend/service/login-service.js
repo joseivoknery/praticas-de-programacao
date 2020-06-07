@@ -11,15 +11,10 @@ const BCRYPT_SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS);
 
 
 const singUp = async (body) => {
-
   body.senha = await bcrypt.hash(body.senha, BCRYPT_SALT_ROUNDS);
- 
   await new Usuario(body).save();
-
   response.mensagem = "O Usuario foi Cadastrado com Sucesso!";
-
   response.status = http_status.STATUS_CREATED;
-
   return response;
 };
 
@@ -47,8 +42,7 @@ const login = async (body) => {
     let payload = gerarPayload(usuario);
     let token = gerarToken(payload, process.env.SECRET);
     
-
-
+    
 
     response.body = security(token);
     response.mensagem = 'Acesso Permitido';
