@@ -35,4 +35,4 @@ app.use('/login', require('./rest/usuario-endpoint'));
 // Inicia o servidor web
 http.listen(process.env.SERVER_PORT, () => console.log('Servidor NodeJs Inicializado com Sucesso 😄 '));
 
-module.exports = app.toString();
+module.exports = app;

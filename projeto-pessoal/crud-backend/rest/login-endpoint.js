@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const service = require('../service/usuario-service');
-const app = require('../server');
+const service = require('../service/login-service');
 
 // realizar login no sistema
 router.post('/', async (req, res) => {

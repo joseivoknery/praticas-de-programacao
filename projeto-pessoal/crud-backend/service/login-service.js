@@ -6,6 +6,7 @@ const utils = require('../utils/constantes-util');
 const response = require('../utils/response');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const app = require('../server');
 
 const login = async (body) => {
 
@@ -19,7 +20,7 @@ const login = async (body) => {
     else if (await bcrypt.compare(body.senha, usuario.senha)) {
       let payload = gerarPayload(usuario);
       let token = gerarToken(payload, process.env.SECRET);
-
+      //Adicionar o acesso aos Endpoints privados aqui
       response.body = security(token);
       response.mensagem = "Acesso Permitido";
       response.status = httpStatus.STATUS_OK;
