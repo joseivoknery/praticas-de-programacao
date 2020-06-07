@@ -45,15 +45,11 @@ const login = async (body) => {
     let token = gerarToken(payload, process.env.SECRET);
     
     if(usuario.nivel === nivelAcesso.ADMIN){
-
       api.use('/produtos', require('./rest/private/produto-endpoint'));
       api.use('/login', require('./rest/private/login-endpoint'));
-
     }
     else{
-      api.use('/produtos', require('./rest/public/produto-endpoint'));
       api.use('/pedidos', require('./rest/private/pedido-endpoint'));
-      api.use('/login', require('./rest/public/login-endpoint'));
     }
 
     response.body = security(token);
