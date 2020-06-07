@@ -26,9 +26,6 @@ app.use(express.json()); // se o corpo da requisição é json, popula um objeto
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-
-app.use('/produtos', require('./rest/public/produto-endpoint'));
-app.use('/pedidos', require('./rest/private/pedido-endpoint'));
 app.use('/login', require('./rest/public/login-endpoint'));
 
 // Inicia o servidor web

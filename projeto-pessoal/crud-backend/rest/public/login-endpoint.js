@@ -27,6 +27,4 @@ router.get('/valid', service.validarToken, (req, res, next) => {
   res.status(req.body.status);
 });
 
-
-
 module.exports = router;

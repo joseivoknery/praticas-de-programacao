@@ -8,10 +8,12 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const api = require('../server');
 const BCRYPT_SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS);
+const nivelAcesso = require('../utils/nivel');
 
 
 const singUp = async (body, acesso) => {
   body.senha = await bcrypt.hash(body.senha, BCRYPT_SALT_ROUNDS);
+  body.nivel = acesso;
   await new Usuario(body).save();
   response.mensagem = "O Usuario foi Cadastrado com Sucesso!";
   response.status = http_status.STATUS_CREATED;
@@ -28,7 +30,7 @@ const logout = async () => {
 
 const login = async (body) => {
 
-  let usuario = await Usuario.findOne({ login: body.login });
+  let usuario = await Usuario.findOne({ login: body.login, nivel:body.acesso });
 
   if (!usuario) {
 
@@ -42,7 +44,17 @@ const login = async (body) => {
     let payload = gerarPayload(usuario);
     let token = gerarToken(payload, process.env.SECRET);
     
-    
+    if(usuario.nivel === nivelAcesso.ADMIN){
+
+      api.use('/produtos', require('./rest/private/produto-endpoint'));
+      api.use('/login', require('./rest/private/login-endpoint'));
+
+    }
+    else{
+      api.use('/produtos', require('./rest/public/produto-endpoint'));
+      api.use('/pedidos', require('./rest/private/pedido-endpoint'));
+      api.use('/login', require('./rest/public/login-endpoint'));
+    }
 
     response.body = security(token);
     response.mensagem = 'Acesso Permitido';
