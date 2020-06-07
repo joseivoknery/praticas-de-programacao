@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const service = require('../service/produto-service');
-const utils = require('../utils/constantes-util');
 
 // cria um produto
 router.post('/', async (req, res) => {
@@ -15,18 +14,9 @@ router.patch('/:id', async (req, res) => {
     res.status(response.status).json(response);
 })
 
-
 // retorna todos os produtos
 router.get('/inicializa', async (req, res) => {
-    let response = await service.listarTodos();
-    if (response.body === null || response.body.length === 0) {
-        response.status = await service.inicializa();
-        response.mensagem = "Massa de Teste Inicializada com Sucesso!";
-    }
-    else {
-        response.status = utils.STATUS_OK;
-        response.mensagem = "Massa de Teste Já Inicializada!";
-    }
+    const response = await service.inicializa();
     res.status(response.status).send(response);
 })
 
