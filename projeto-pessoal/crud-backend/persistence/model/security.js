@@ -1,4 +1,5 @@
 module.exports = { 
   auth: Boolean, 
-  token: String 
+  token: String,
+  msg: String
 }

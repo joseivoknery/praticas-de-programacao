@@ -14,4 +14,10 @@ router.get('/', async (req, res) => {
   res.status(response.status).json(response);
 });
 
+// verifica se o token é valido
+router.get('/valida-token', (req, res, next) => {
+  const response = service.validarToken(req, res, next);
+  res.status(response.status).json(response);
+});
+
 module.exports = router;

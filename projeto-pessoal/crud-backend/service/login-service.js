@@ -41,14 +41,42 @@ const login = async (body) => {
 
 const gerarToken = (payload, secret) => {
   return jwt.sign(payload, secret, {
-    expiresIn: utils.TEMPO_TOKEN_EXPIRE, // expira em 5 minutos (300 segundos)
+    expiresIn: utils.TIME_TOKEN_EXPIRE, // expira em 5 minutos (300 segundos)
   });
 };
 
-const validaToken = (token) => {
+const hasToken = (token) => {
   return token === utils.STRING_EMPTY || token === null || token === undefined
-    ? null
-    : token;
+    ? false
+    : true;
+};
+
+
+const validarToken = (req, res, next) => {
+
+  let token = req.headers['x-access-token'] || req.headers['authorization'];
+
+  if (!hasToken(token)) {
+    response.body = security(token);
+    response.status = httpStatus.STATUS_Unauthorized;
+    response.mensagem = "O token não existe!"
+    return response;
+  }
+
+  if (token.startsWith('Bearer ')) {
+    token = token.slice(7, token.length);
+  }
+
+  jwt.verify(token, process.env.SECRET, (err, decoded) => {
+    if (err) {
+      response.body = security(err);
+      response.status = httpStatus.STATUS_ERROR_SERVER;
+      response.mensagem = "Não foi possível autenticar o token."
+      return response;
+    }
+    req.userId = decoded.id;
+    next(); // pode continuar processando a requisição
+  });
 };
 
 const gerarPayload = (load) => {
@@ -58,14 +86,16 @@ const gerarPayload = (load) => {
 };
 
 const security = (token) => {
-  Security.auth = validaToken(token) === null ? false : true;
-  Security.token = validaToken(token);
+  Security.auth = hasToken(token) ? utils.TOKEN_IS_VALID : utils.TOKEN_IS_NOT_VALID;
+  Security.token = hasToken(token) ? token : utils.TOKEN_NOT_EXIST;
+  Security.msg = hasToken(token) ? httpStatus.STATUS_OK : httpStatus.STATUS_Unauthorized ;
   return Security;
 };
 
 const methods = {
   login: login,
-  logout: logout
+  logout: logout,
+  validarToken: validarToken
 };
 
 module.exports = methods;
