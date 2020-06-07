@@ -27,10 +27,9 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 
-app.use('/produtos', require('./rest/produto-endpoint'));
-app.use('/clientes', require('./rest/cliente-endpoint'));
-app.use('/pedidos', require('./rest/pedido-endpoint'));
-app.use('/login', require('./rest/login-endpoint'));
+app.use('/produtos', require('./rest/public/produto-endpoint'));
+app.use('/pedidos', require('./rest/private/pedido-endpoint'));
+app.use('/login', require('./rest/public/login-endpoint'));
 
 // Inicia o servidor web
 http.listen(process.env.SERVER_PORT, () => console.log('Servidor NodeJs Inicializado com Sucesso 😄 '));
