@@ -12,7 +12,6 @@ const logout = async () => {
   response.body = security(utils.STRING_EMPTY);
   response.mensagem = 'Logout realizado com Sucesso!';
   response.status = httpStatus.STATUS_OK;
-
   return response;
 };
 
