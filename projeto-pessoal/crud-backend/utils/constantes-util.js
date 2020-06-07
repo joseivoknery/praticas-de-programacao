@@ -12,8 +12,8 @@ const status = {
 
 STATUS_CREATED: STATUS_CREATED,
 STATUS_OK: STATUS_OK,
-STATUS_Unauthorized = STATUS_Unauthorized,
-STATUS_Forbidden = STATUS_Forbidden,
+STATUS_Unauthorized: STATUS_Unauthorized,
+STATUS_Forbidden: STATUS_Forbidden,
 STATUS_NOT_FOUND: STATUS_NOT_FOUND,
 STATUS_ERROR_SERVER: STATUS_ERROR_SERVER,
 
