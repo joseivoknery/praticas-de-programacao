@@ -1,3 +1,4 @@
+const environments = require('../environment');
 const Usuario = require('../persistence/dao/usuario-dao');
 const Security = require('../persistence/model/security');
 const Payload = require('../persistence/model/payload');
@@ -6,11 +7,10 @@ const utils = require('../utils/constantes-util');
 const response = require('../utils/response');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const BCRYPT_SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS);
 const nivelAcesso = require('../utils/nivel');
 
 const singUp = async (body, acesso) => {
-  body.senha = await bcrypt.hash(body.senha, BCRYPT_SALT_ROUNDS);
+  body.senha = await bcrypt.hash(body.senha, environments.SALT_ROUNDS);
   body.nivel = acesso;
   await new Usuario(body).save();
   response.mensagem = 'O Usuario foi Cadastrado com Sucesso!';
@@ -41,7 +41,7 @@ const login = async (body) => {
     response.status = http_status.STATUS_Forbidden;
   } else if (await bcrypt.compare(body.senha, usuario.senha)) {
     let payload = gerarPayload(usuario);
-    let token = gerarToken(payload, process.env.SECRET);
+    let token = gerarToken(payload, environments.SECRET);
     response.body = security(token, usuario.nivel);
     response.mensagem = 'Acesso Permitido';
     response.status = http_status.STATUS_OK;
@@ -79,7 +79,7 @@ const validarToken = async (req) => {
       token = token.slice(7, token.length);
     }
 
-   jwt.verify(token, process.env.SECRET, async (err, decoded) => {
+   jwt.verify(token, environments.SECRET , async (err, decoded) => {
       if (err) {
         response.body = security(null, nivelAcesso.NO_ACESS);
         response.status = http_status.STATUS_ERROR_SERVER;

@@ -1,22 +1,18 @@
 import React from 'react';
-
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
-
+import Container from 'react-bootstrap/Container';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Cabecalho from './componentes/cabecalho';
-import Conteudo from './componentes/conteudo';
-import FormProdutos from './componentes/produtos/form';
 import FormClientes from './componentes/clientes/form';
-import ListarProdutos from './componentes/produtos/listar';
-import VisualizarProduto from './componentes/produtos/visualizar';
 import ListarClientes from './componentes/clientes/listar';
 import VisualizarClientes from './componentes/clientes/visualizar';
+import SignUp from './componentes/login/sign-up';
 import NaoEncontrada from './componentes/naoencontrada';
+import FormProdutos from './componentes/produtos/form';
+import ListarProdutos from './componentes/produtos/listar';
+import VisualizarProduto from './componentes/produtos/visualizar';
 
-import Container from 'react-bootstrap/Container';
+
+
 
 function App() {
   return (
@@ -25,7 +21,7 @@ function App() {
       <Container>
         <Switch>
 
-          <Route path="/" exact={true}><Conteudo/></Route>
+          <Route path="/" exact={true}><SignUp/></Route>
 
           <Route path="/produtos/" exact={true}>
             <ListarProdutos/>

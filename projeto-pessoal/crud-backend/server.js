@@ -1,5 +1,7 @@
 // Lê os dados do arquivo .env
-require('dotenv').config()
+//require('dotenv').config()
+
+const environments = require('./environment');
 
 // Importa os frameworks
 const express = require('express');
@@ -9,7 +11,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 // Conecta ao banco de dados
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
+mongoose.connect(environments.DATABASE_URL, { useNewUrlParser: true })
 const db = mongoose.connection
 db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('conectado ao banco de dados'))
@@ -30,6 +32,6 @@ app.use('/public/login', require('./rest/public/login-endpoint'));
 app.use('/public/produtos', require('./rest/public/produto-endpoint'));
 
 // Inicia o servidor web
-http.listen(process.env.SERVER_PORT, () => console.log('Servidor NodeJs Inicializado com Sucesso 😄 '));
+http.listen(environments.SERVER_PORT, () => console.log('Servidor NodeJs Inicializado com Sucesso 😄 '));
 
 module.exports = app;
