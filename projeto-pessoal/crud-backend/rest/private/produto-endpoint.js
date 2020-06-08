@@ -1,35 +1,38 @@
 const express = require('express');
 const router = express.Router();
-const service = require('../service/produto-service');
-const http_status = require('../../utils/http-status');
-const response = require('../../utils/response');
+const service = require('../../service/produto-service');
 
 // cria um produto
 router.post('/', async (req, res) => {
-    const response = await service.salvarProduto(req.body);
+    let response = await service.salvarProduto(req.body);
     res.status(response.status).json(response);
 })
 
 // atualiza um produto pelo id
 router.patch('/:id', async (req, res) => {
-    const response = await service.editarProduto(req.params.id, req.body);
+    let response = await service.editarProduto(req.params.id, req.body);
     res.status(response.status).json(response);
 })
 
 // inicializa a massa de teste
-router.get('/inicializa', async (req, res) => {
+router.get('/start', async (req, res) => {
    
-    const response = await service.listarTodos();
+    let response = 0;
+    let mensagem = "";
 
-    if (response.body === null || response.body.length === 0) {
+    let produtos = await service.listarTodos();
+
+    if (produtos.body === null || produtos.body.length === 0) {
+
         response = service.inicializa();
+        mensagem = "Massa de Teste Inicializada com Sucesso!";
     }
     else {
-        response.status = http_status.STATUS_OK;
-        response.mensagem = "Massa de Teste Já Inicializada!";
+        response = STATUS_OK;
+        mensagem = "Massa de Teste Já Inicializada!";
     }
 
-    res.status(response.status).send(response);
+    res.status(response).send(mensagem);
 })
 
 // remove um produto

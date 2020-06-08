@@ -26,8 +26,10 @@ app.use(express.json()); // se o corpo da requisição é json, popula um objeto
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-app.use('/login', require('./rest/public/login-endpoint'));
-app.use('/produtos', require('./rest/public/produto-endpoint'));
+app.use('/public/login', require('./rest/public/login-endpoint'));
+app.use('/public/produtos', require('./rest/public/produto-endpoint'));
 
 // Inicia o servidor web
 http.listen(process.env.SERVER_PORT, () => console.log('Servidor NodeJs Inicializado com Sucesso 😄 '));
+
+module.exports = app;

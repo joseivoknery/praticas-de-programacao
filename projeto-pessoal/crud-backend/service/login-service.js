@@ -6,7 +6,6 @@ const utils = require('../utils/constantes-util');
 const response = require('../utils/response');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const express = require('express');
 const BCRYPT_SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS);
 const nivelAcesso = require('../utils/nivel');
 
@@ -14,11 +13,10 @@ const singUp = async (body, acesso) => {
   body.senha = await bcrypt.hash(body.senha, BCRYPT_SALT_ROUNDS);
   body.nivel = acesso;
   await new Usuario(body).save();
-  response.mensagem = "O Usuario foi Cadastrado com Sucesso!";
+  response.mensagem = 'O Usuario foi Cadastrado com Sucesso!';
   response.status = http_status.STATUS_CREATED;
   return response;
 };
-
 
 const logout = async () => {
   response.body = security(utils.STRING_EMPTY, nivelAcesso.NO_ACESS);
@@ -27,41 +25,30 @@ const logout = async () => {
   return response;
 };
 
+const findUser = async (body) => {
+  let usuario = await Usuario.findOne({ nivel: body.nivel });
+  return usuario;
+}
+
 const login = async (body) => {
 
-  let usuario = await Usuario.findOne({ login: body.login, nivel:body.nivel });
+  let usuario = await Usuario.findOne({ login: body.login, nivel: body.nivel });
 
   if (!usuario) {
-
     response.body = security(utils.STRING_EMPTY, nivelAcesso.NO_ACESS);
     response.mensagem =
       "'Não foi encontrado um usuário com o login informado!'";
     response.status = http_status.STATUS_Forbidden;
-
   } else if (await bcrypt.compare(body.senha, usuario.senha)) {
-
     let payload = gerarPayload(usuario);
     let token = gerarToken(payload, process.env.SECRET);
-
-  /*   if (usuario.nivel === nivelAcesso.ADMIN) {
-      response.body = security(token, nivelAcesso.ADMIN);
-      express().use('/produtos', require('../rest/private/produto-endpoint'));
-      express().use('/login', require('../rest/private/login-endpoint'));
-    } else {
-      response.body = security(token, nivelAcesso.CLIENTE);
-      express().use('/pedidos', require('../rest/private/pedido-endpoint'));
-    }
- */
-    response.body = security(token, nivelAcesso.NO_ACESS);
+    response.body = security(token, usuario.nivel);
     response.mensagem = 'Acesso Permitido';
     response.status = http_status.STATUS_OK;
-
   } else {
-
     response.body = security(utils.STRING_EMPTY, nivelAcesso.NO_ACESS);
     response.mensagem = 'Senha inválida!';
     response.status = http_status.STATUS_Forbidden;
-
   }
 
   return response;
@@ -79,38 +66,36 @@ const hasToken = (token) => {
     : true;
 };
 
-
-const validarToken = (req, res, next) => {
-
+const validarToken = async (req) => {
   let token = req.headers['x-access-token'] || req.headers['authorization'];
 
   if (!hasToken(token)) {
     response.body = security(token, nivelAcesso.NO_ACESS);
     response.status = http_status.STATUS_Unauthorized;
-    response.mensagem = "O token não existe!"
-    return response;
-  }
+    response.mensagem = 'O token não existe!';
+  } else {
 
-  if (token.startsWith('Bearer ')) {
-    token = token.slice(7, token.length);
-  }
-
-  jwt.verify(token, process.env.SECRET, (err, decoded) => {
-    if (err) {
-      response.body = security(err, nivelAcesso.NO_ACESS);
-      response.status = http_status.STATUS_ERROR_SERVER;
-      response.mensagem = "Não foi possível autenticar o token."
-      return response;
+    if (token.startsWith('Bearer ')) {
+      token = token.slice(7, token.length);
     }
 
-    response.status = http_status.STATUS_OK;
-    response.mensagem = "Token Válido -> " + decoded.id;
+   jwt.verify(token, process.env.SECRET, async (err, decoded) => {
+      if (err) {
+        response.body = security(null, nivelAcesso.NO_ACESS);
+        response.status = http_status.STATUS_ERROR_SERVER;
+        response.mensagem = 'Não foi possível autenticar o token.';
+      }
+      else{
+        response.status = http_status.STATUS_OK;
+        response.mensagem = 'Token Válido -> ' + decoded.id;
+        let usuario = await Usuario.findById(decoded.id);
+        response.body = usuario.nivel;
+      }
+    });
+  }
 
-    req.body = response; 
-    req.userId = decoded.id;
-    next();
-  });
-};
+  return response;
+}
 
 const gerarPayload = (load) => {
   Payload.id = load._id;
@@ -122,7 +107,7 @@ const security = (token, nivel) => {
   let has = hasToken(token);
   Security.auth = has ? utils.TOKEN_IS_VALID : utils.TOKEN_IS_NOT_VALID;
   Security.token = has ? token : utils.TOKEN_NOT_EXIST;
-  Security.msg = has ? http_status.STATUS_OK : http_status.STATUS_Unauthorized ;
+  Security.msg = has ? http_status.STATUS_OK : http_status.STATUS_Unauthorized;
   Security.nivel = has ? nivel : nivelAcesso.NO_ACESS;
   return Security;
 };
@@ -131,7 +116,8 @@ const methods = {
   login: login,
   logout: logout,
   validarToken: validarToken,
-  singUp: singUp
+  singUp: singUp,
+  findUser:findUser
 };
 
 module.exports = methods;

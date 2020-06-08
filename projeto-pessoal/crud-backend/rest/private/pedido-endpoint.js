@@ -4,13 +4,13 @@ const service = require('../../service/pedido-service');
 
 // cria um Pedido
 router.post('/', async (req, res) => {
-    const response = await service.salvarPedido(req.body);
+    let response = await service.salvarPedido(req.body);
     res.status(response.status).json(response);
 })
 
 // atualiza um Pedido pelo id
 router.patch('/:id', async (req, res) => {
-    const response = await service.editarPedido(req.params.id, req.body);
+    let response = await service.editarPedido(req.params.id, req.body);
     res.status(response.status).json(response);
 })
 

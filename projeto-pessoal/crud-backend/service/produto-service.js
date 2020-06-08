@@ -11,12 +11,8 @@ function inicializa() {
     new Produto({ 'nome': 'Pão de Alho', 'valor': 10.0, 'tipo': 'Petisco', 'foto': 'https://www.receitasnestle.com.br/images/default-source/recipes/pao_de_alho.jpg' }).save();
     new Produto({ 'nome': 'Filé a Parmegiana', 'valor': 18.0, 'tipo': 'Refeição', 'foto': 'https://leianoticias.com.br/wp-content/uploads/Fil%C3%A9-capa.jpg' }).save();
     new Produto({ 'nome': 'Feijoada', 'valor': 35.0, 'tipo': 'Refeição', 'foto': 'https://img.cybercook.com.br/receitas/776/feijoada-623x350.jpeg' }).save();
-
-    response.status = http_status.STATUS_CREATED;
-    response.mensagem = "Massa de Teste Inicializada com Sucesso!";
     
-    return response;
-
+    return  http_status.STATUS_CREATED;
 }
 
 const salvarProduto = async (produto) => {
