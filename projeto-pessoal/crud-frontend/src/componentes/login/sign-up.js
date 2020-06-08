@@ -14,7 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import React from 'react';
+import React, { useState } from 'react';
 
 function Copyright() {
   return (
@@ -63,6 +63,28 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
 
+  const criaFormEmBranco = () => {
+    return {
+      login: "",
+      senha: "",
+      nivel: 0
+    };
+  };
+
+  const [form, setForm] = useState(criaFormEmBranco());
+
+  const setValor = (evento, campo) => {
+    setForm({ ...form, [campo]: evento.target.value });
+  };
+
+  const submeter = (evento) => {
+    evento.preventDefault();
+      LoginService.adicionarCliente(form, () => {
+        history.push('/');
+      });
+    }
+  };
+
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -75,13 +97,15 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Entre
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} noValidate onSubmit={(e) => submeter(e)}>
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
               id="login"
+              value={form.login}
+              onChange={(e) => setValor(e, 'login')}
               label="Nome Usuário"
               name="login"
               autoComplete="user name"
@@ -96,14 +120,16 @@ export default function SignUp() {
               label="Senha"
               type="password"
               id="password"
+              value={form.senha}
+              onChange={(e) => setValor(e, 'senha')}
               autoComplete="current-password"
             />
             
             <FormLabel component="legend">Nível Acesso</FormLabel>
-            <RadioGroup aria-label="nivel" name="nivel1" /* value={value} onChange={handleChange} */>
-              <FormControlLabel value="admin" control={<Radio />} label="Admin" />
-              <FormControlLabel value="cliente" control={<Radio />} label="Cliente" />
-              <FormControlLabel value="outros" control={<Radio />} label="Outros" />
+            <RadioGroup aria-label="nivel" name="nivel1"  value={form.nivel} onChange={(e) => setValor(e, 'nivel')}>
+              <FormControlLabel value="1" control={<Radio />} label="Admin" />
+              <FormControlLabel value="2" control={<Radio />} label="Cliente" />
+              <FormControlLabel value="0" control={<Radio />} label="Outros" />
             </RadioGroup> 
     
     <FormControlLabel

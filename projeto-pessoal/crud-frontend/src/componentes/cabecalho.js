@@ -1,8 +1,8 @@
 import React from 'react';
-import { LinkContainer } from 'react-router-bootstrap';
-import ProdutosService from '../servicos/produtos_service'
-import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import { LinkContainer } from 'react-router-bootstrap';
+import ProdutosService from '../servicos/produtos_service';
 
 function Cabecalho() {
 
@@ -10,7 +10,7 @@ function Cabecalho() {
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
-      <Navbar.Brand>Restaurante</Navbar.Brand>
+      <Navbar.Brand>Quick Food</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
