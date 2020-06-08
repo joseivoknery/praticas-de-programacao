@@ -6,10 +6,9 @@ const utils = require('../utils/constantes-util');
 const response = require('../utils/response');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const api = require('../server');
+const express = require('express');
 const BCRYPT_SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS);
 const nivelAcesso = require('../utils/nivel');
-
 
 const singUp = async (body, acesso) => {
   body.senha = await bcrypt.hash(body.senha, BCRYPT_SALT_ROUNDS);
@@ -22,7 +21,7 @@ const singUp = async (body, acesso) => {
 
 
 const logout = async () => {
-  response.body = security(utils.STRING_EMPTY);
+  response.body = security(utils.STRING_EMPTY, nivelAcesso.NO_ACESS);
   response.mensagem = 'Logout realizado com Sucesso!';
   response.status = http_status.STATUS_OK;
   return response;
@@ -30,11 +29,11 @@ const logout = async () => {
 
 const login = async (body) => {
 
-  let usuario = await Usuario.findOne({ login: body.login, nivel:body.acesso });
+  let usuario = await Usuario.findOne({ login: body.login, nivel:body.nivel });
 
   if (!usuario) {
 
-    response.body = security(utils.STRING_EMPTY);
+    response.body = security(utils.STRING_EMPTY, nivelAcesso.NO_ACESS);
     response.mensagem =
       "'Não foi encontrado um usuário com o login informado!'";
     response.status = http_status.STATUS_Forbidden;
@@ -43,22 +42,22 @@ const login = async (body) => {
 
     let payload = gerarPayload(usuario);
     let token = gerarToken(payload, process.env.SECRET);
-    
-    if(usuario.nivel === nivelAcesso.ADMIN){
-      api.use('/produtos', require('./rest/private/produto-endpoint'));
-      api.use('/login', require('./rest/private/login-endpoint'));
-    }
-    else{
-      api.use('/pedidos', require('./rest/private/pedido-endpoint'));
+
+    if (usuario.nivel === nivelAcesso.ADMIN) {
+      response.body = security(token, nivelAcesso.ADMIN);
+      express().use('/produtos', require('../private/produto-endpoint'));
+      express().use('/login', require('../private/login-endpoint'));
+    } else {
+      response.body = security(token, nivelAcesso.CLIENTE);
+      express().use('/pedidos', require('../private/pedido-endpoint'));
     }
 
-    response.body = security(token);
     response.mensagem = 'Acesso Permitido';
     response.status = http_status.STATUS_OK;
 
   } else {
 
-    response.body = security(utils.STRING_EMPTY);
+    response.body = security(utils.STRING_EMPTY, nivelAcesso.NO_ACESS);
     response.mensagem = 'Senha inválida!';
     response.status = http_status.STATUS_Forbidden;
 
@@ -85,7 +84,7 @@ const validarToken = (req, res, next) => {
   let token = req.headers['x-access-token'] || req.headers['authorization'];
 
   if (!hasToken(token)) {
-    response.body = security(token);
+    response.body = security(token, nivelAcesso.NO_ACESS);
     response.status = http_status.STATUS_Unauthorized;
     response.mensagem = "O token não existe!"
     return response;
@@ -97,7 +96,7 @@ const validarToken = (req, res, next) => {
 
   jwt.verify(token, process.env.SECRET, (err, decoded) => {
     if (err) {
-      response.body = security(err);
+      response.body = security(err, nivelAcesso.NO_ACESS);
       response.status = http_status.STATUS_ERROR_SERVER;
       response.mensagem = "Não foi possível autenticar o token."
       return response;
@@ -118,10 +117,12 @@ const gerarPayload = (load) => {
   return Payload;
 };
 
-const security = (token) => {
-  Security.auth = hasToken(token) ? utils.TOKEN_IS_VALID : utils.TOKEN_IS_NOT_VALID;
-  Security.token = hasToken(token) ? token : utils.TOKEN_NOT_EXIST;
-  Security.msg = hasToken(token) ? http_status.STATUS_OK : http_status.STATUS_Unauthorized ;
+const security = (token, nivel) => {
+  let has = hasToken(token);
+  Security.auth = has ? utils.TOKEN_IS_VALID : utils.TOKEN_IS_NOT_VALID;
+  Security.token = has ? token : utils.TOKEN_NOT_EXIST;
+  Security.msg = has ? http_status.STATUS_OK : http_status.STATUS_Unauthorized ;
+  Security.nivel = has ? nivel : nivelAcesso.NO_ACESS;
   return Security;
 };
 

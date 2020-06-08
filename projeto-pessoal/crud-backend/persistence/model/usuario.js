@@ -5,6 +5,5 @@ module.exports = {
   senha: String,
   nivel: String,
   endereco: String,
-  telefone: String,
-  foto: String
+  telefone: String
 }
