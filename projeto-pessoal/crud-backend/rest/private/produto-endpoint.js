@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const service = require('../../service/produto-service');
+const httpStatus = require('../../utils/http-status');
 
 // cria um produto
 router.post('/', async (req, res) => {
@@ -28,7 +29,7 @@ router.get('/start', async (req, res) => {
         mensagem = "Massa de Teste Inicializada com Sucesso!";
     }
     else {
-        response = STATUS_OK;
+        response = httpStatus.STATUS_OK;
         mensagem = "Massa de Teste Já Inicializada!";
     }
 

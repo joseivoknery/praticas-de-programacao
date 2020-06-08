@@ -2,12 +2,13 @@ const environments = {
 
     localhost: 'http://localhost:5000',
 
-    public: '/pubilc/',
+    public: '/public',
     client: '/client',
-    admin: '/admin/',
+    admin: '/admin',
+    security: '/security',
 
     produtos: '/produtos/',
-    inicializa: '/inicializa',
+    inicializa: '/start',
     login: '/login/'
   
 }

@@ -4,7 +4,7 @@ const environments = require('../utils/environments');
 // Implementação das funções CRUD
 const getProdutos = async () => {
   
-  let response = await axios.get(environments.localhost + environments.produtos);
+  let response = await axios.get(environments.localhost + environments.public + environments.produtos);
 
   return response.data.body;
   
@@ -12,14 +12,14 @@ const getProdutos = async () => {
 
 const getProduto = async (idProduto) => {
 
-  let response = await axios.get(environments.localhost + environments.produtos + idProduto);
+  let response = await axios.get(environments.localhost + environments.public + environments.produtos + idProduto);
 
   return response.data.body;
 };
 
 const removerProduto = async (id, callback) => {
 
-  await axios.delete(environments.localhost + environments.produtos + id);
+  await axios.delete(environments.localhost + environments.public + environments.produtos + id);
 
   callback();
 
@@ -29,7 +29,7 @@ const inicializa = () => {
 
   let response = '';
 
-  axios.get(environments.localhost + environments.inicializa).then((res) => {
+  axios.get(environments.localhost + environments.admin + environments.produtos + environments.inicializa).then((res) => {
     response = res;
   });
 
@@ -38,14 +38,14 @@ const inicializa = () => {
 
 const adicionarProduto = async (produto, callback) => {
 
-  await axios.post(environments.localhost + environments.produtos, produto);
+  await axios.post(environments.localhost + environments.admin + environments.produtos, produto);
 
   callback();
 };
 
 const editarProduto = async (idProduto, produto, callback) => {
 
-  await axios.patch(environments.localhost + environments.produtos + idProduto, produto);
+  await axios.patch(environments.localhost + environments.admin + environments.produtos + idProduto, produto);
 
   callback();
 };

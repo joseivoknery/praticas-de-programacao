@@ -5,7 +5,7 @@ import Cabecalho from './componentes/cabecalho';
 import FormClientes from './componentes/clientes/form';
 import ListarClientes from './componentes/clientes/listar';
 import VisualizarClientes from './componentes/clientes/visualizar';
-import SignUp from './componentes/login/signup';
+import SignInSide from './componentes/login/sign-in-side';
 import NaoEncontrada from './componentes/naoencontrada';
 import FormProdutos from './componentes/produtos/form';
 import ListarProdutos from './componentes/produtos/listar';
@@ -18,7 +18,7 @@ function App() {
       <Container>
         <Switch>
 
-          <Route path="/" exact={true}><SignUp/></Route>
+          <Route path="/" exact={true}><SignInSide/></Route>
 
           <Route path="/produtos/" exact={true}>
             <ListarProdutos/>

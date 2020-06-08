@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import { useParams, useHistory } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import Card from 'react-bootstrap/Card';
+import { LinkContainer } from 'react-router-bootstrap';
+import { useHistory, useParams } from "react-router-dom";
 import ProdutosService from '../../servicos/produtos_service';
 
-import { LinkContainer } from 'react-router-bootstrap';
-import Card from 'react-bootstrap/Card';
 
 function VisualizarProduto() {
   const {idProduto} = useParams();
@@ -22,7 +22,7 @@ function VisualizarProduto() {
     if (valor !== undefined) {
       return 'R$ ' + parseFloat(valor).toFixed(2).replace('.',',');
     }
-    
+    console.log(valor);
     return 'R$ 0,00';
   };
   
