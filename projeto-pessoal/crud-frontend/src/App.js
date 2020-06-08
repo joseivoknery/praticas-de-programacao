@@ -5,14 +5,11 @@ import Cabecalho from './componentes/cabecalho';
 import FormClientes from './componentes/clientes/form';
 import ListarClientes from './componentes/clientes/listar';
 import VisualizarClientes from './componentes/clientes/visualizar';
-import SignUp from './componentes/login/sign-up';
+import SignUp from './componentes/login/signup';
 import NaoEncontrada from './componentes/naoencontrada';
 import FormProdutos from './componentes/produtos/form';
 import ListarProdutos from './componentes/produtos/listar';
 import VisualizarProduto from './componentes/produtos/visualizar';
-
-
-
 
 function App() {
   return (
