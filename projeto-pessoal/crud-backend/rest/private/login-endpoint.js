@@ -3,7 +3,7 @@ const router = express.Router();
 const service = require('../../service/login-service');
 const nivelAcesso = require('../../utils/nivel');
 
-// realizar cadastro de um novo usuário/cliente no sistema
+// realizar cadastro de um novo usuário admin no sistema
 router.post('/signup', async (req, res) => {
   let response = await service.singUp(req.body, nivelAcesso.ADMIN);
   res.status(response.status).json(response);

@@ -37,11 +37,15 @@ router.get('/security', async (req, res) => {
   let response = await service.validarToken(req);
 
   if (parseInt(response.body) === nivelAcesso.ADMIN) {  
+
     const app = require('../../server');
     app.use('/admin/login', require('../private/login-endpoint'));
     app.use('/admin/produtos', require('../private/produto-endpoint'));
+
   } else if (parseInt(response.body) === nivelAcesso.CLIENTE) {
+
     app.use('/client/pedidos', require('../rest/private/pedido-endpoint'));
+    
   }
   res.status(response.status).json(response);
 });
