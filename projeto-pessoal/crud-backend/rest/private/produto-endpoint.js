@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const service = require('../service/produto-service');
+const http_status = require('../../utils/http-status');
+const response = require('../../utils/response');
 
 // cria um produto
 router.post('/', async (req, res) => {
@@ -16,7 +18,17 @@ router.patch('/:id', async (req, res) => {
 
 // inicializa a massa de teste
 router.get('/inicializa', async (req, res) => {
-    const response = await service.inicializa();
+   
+    const response = await service.listarTodos();
+
+    if (response.body === null || response.body.length === 0) {
+        response = service.inicializa();
+    }
+    else {
+        response.status = http_status.STATUS_OK;
+        response.mensagem = "Massa de Teste Já Inicializada!";
+    }
+
     res.status(response.status).send(response);
 })
 

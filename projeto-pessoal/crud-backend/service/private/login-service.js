@@ -43,15 +43,16 @@ const login = async (body) => {
     let payload = gerarPayload(usuario);
     let token = gerarToken(payload, process.env.SECRET);
 
-    if (usuario.nivel === nivelAcesso.ADMIN) {
+  /*   if (usuario.nivel === nivelAcesso.ADMIN) {
       response.body = security(token, nivelAcesso.ADMIN);
-      express().use('/produtos', require('../private/produto-endpoint'));
-      express().use('/login', require('../private/login-endpoint'));
+      express().use('/produtos', require('../rest/private/produto-endpoint'));
+      express().use('/login', require('../rest/private/login-endpoint'));
     } else {
       response.body = security(token, nivelAcesso.CLIENTE);
-      express().use('/pedidos', require('../private/pedido-endpoint'));
+      express().use('/pedidos', require('../rest/private/pedido-endpoint'));
     }
-
+ */
+    response.body = security(token, nivelAcesso.NO_ACESS);
     response.mensagem = 'Acesso Permitido';
     response.status = http_status.STATUS_OK;
 
