@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: 'url(https://www.estalagemdomirante.com.br/wp-content/uploads/2016/05/restaurante65-1024x683.jpg)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+      theme.palette.type === 'dark' ? theme.palette.grey[50] : theme.palette.grey[900],
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   },
@@ -90,6 +90,10 @@ export default function SignInSide() {
   const setValor = (evento, campo) => {
     setUsuario({ ...usuario, [campo]: evento.target.value });
   };
+
+  const cadastrar = () =>{
+    history.push('/cadastro');
+  }
 
   const submeter = (evento) => {
 
@@ -171,13 +175,15 @@ export default function SignInSide() {
               onChange={(e) => setValor(e, 'senha')}
               autoComplete="current-password"
             />
-            <br/>
+
+             <Grid item xs={12}>
             <FormLabel component="legend">Nível Acesso</FormLabel>
-            <RadioGroup aria-label="nivel" name="nivel1"  value={usuario.nivel} onChange={(e) => setValor(e, 'nivel')}>
+            <RadioGroup row aria-label="nivel" name="nivel1"  value={usuario.nivel} onChange={(e) => setValor(e, 'nivel')}>
               <FormControlLabel value="1" control={<Radio />} label="Admin" />
               <FormControlLabel value="2" control={<Radio />} label="Cliente" />
               <FormControlLabel value="0" control={<Radio />} label="Outros" />
             </RadioGroup>
+            </Grid>
 
             <Button
               type="submit"
@@ -197,10 +203,23 @@ export default function SignInSide() {
                   Esqueceu a Senha?
                 </Link>
               </Grid>
+
+
+              <Button
+              type="button"
+              fullWidth
+              onClick={() => cadastrar()}
+              variant="contained"
+              color="secondary"
+              className={classes.submit}
+            >
+             Cadastrar
+            </Button>
+
               <Grid item>
-                <Link href="#" variant="body2">
+                <h7>
                   {"Não tem uma conta? Inscreva-se"}
-                </Link>
+                </h7>
               </Grid>
             </Grid>
 

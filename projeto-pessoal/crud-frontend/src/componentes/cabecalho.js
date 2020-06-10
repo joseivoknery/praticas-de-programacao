@@ -15,26 +15,36 @@ function Cabecalho() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
 
-          <LinkContainer to="/">
-            <Nav.Link>Início
+        <LinkContainer to="/">
+            <Nav.Link>Home
             </Nav.Link>
           </LinkContainer>
+
+          <LinkContainer to="/login">
+            <Nav.Link>Login
+            </Nav.Link>
+          </LinkContainer>
+
+          {/* <LinkContainer to="/cadastro">
+            <Nav.Link>Cadastrar
+            </Nav.Link>
+          </LinkContainer> */}
 
           <LinkContainer to="/produtos">
             <Nav.Link>Produtos</Nav.Link>
           </LinkContainer>
 
-          <LinkContainer to="/produtos/novo">
+          {/* <LinkContainer to="/produtos/novo">
             <Nav.Link>Novo Produto</Nav.Link>
-          </LinkContainer>
+          </LinkContainer> */}
 
-          <LinkContainer to="/clientes">
+          {/* <LinkContainer to="/clientes">
             <Nav.Link>Clientes</Nav.Link>
           </LinkContainer>
 
           <LinkContainer to="/clientes/novo">
             <Nav.Link>Novo Cliente</Nav.Link>
-          </LinkContainer>
+          </LinkContainer> */}
 
         </Nav>
       </Navbar.Collapse>

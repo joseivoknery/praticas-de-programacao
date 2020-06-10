@@ -20,10 +20,19 @@ const autenticar = async (form, callback) => {
   
 };
 
+const signup = async (form, callback) => {
+  
+  const response = await axios.post(environments.localhost + environments.public + environments.login + environments.signup , form);
+
+  callback(response);
+  
+};
+
 
 const LoginService = {
   login,
-  autenticar
+  autenticar,
+  signup
 };
 
 // Exportando o serviço

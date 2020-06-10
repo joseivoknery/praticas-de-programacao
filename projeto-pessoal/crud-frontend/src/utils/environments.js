@@ -9,7 +9,8 @@ const environments = {
 
     produtos: '/produtos/',
     inicializa: '/start',
-    login: '/login/'
+    login: '/login/',
+    signup: '/signup'
   
 }
 
