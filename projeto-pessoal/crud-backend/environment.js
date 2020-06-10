@@ -11,7 +11,3 @@ const environment = {
 }
 
 module.exports = environment;
-
-/* PAGSEGURO_TOKEN=8B2E0E69AB45454AB8D48388C8984BD5
-EMAIL_VENDEDOR=brunogamacatao@gmail.com
-HOST_PAGSEGURO=ws.sandbox.pagseguro.uol.com.br */
