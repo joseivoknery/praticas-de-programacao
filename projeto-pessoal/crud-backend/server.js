@@ -19,7 +19,7 @@ db.once('open', () => console.log('conectado ao banco de dados'))
 // Cria o servidor web
 const app = express();
 const http = require('http').createServer(app);
-const io = require('socket.io')(http);
+//const io = require('socket.io')(http);
 
 // Configura o servidor web
 app.use(cors()); // permite requisições CORS de qualquer host
@@ -30,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.use('/public/login', require('./rest/public/login-endpoint'));
 app.use('/public/produtos', require('./rest/public/produto-endpoint'));
+app.use('/start', require('./rest/public/start'));
 
 // Inicia o servidor web
 http.listen(environments.SERVER_PORT, () => console.log('Servidor NodeJs Inicializado com Sucesso 😄 '));
