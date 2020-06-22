@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const httpStatus = require('../../utils/http-status');
 const service = require('../../service/produto-service');
 
 // retorna todos os produtos
@@ -15,7 +16,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // inicializa a massa de teste
-router.get('/start', async (req, res) => {
+router.get('/inicializa', async (req, res) => {
    
     let response = 0;
     let mensagem = "";

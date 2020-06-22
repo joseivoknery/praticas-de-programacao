@@ -116,7 +116,7 @@ const listarTodos = async () => {
 
         response.mensagem = "Erro de Servidor - Contate o ADM!";
 
-        response.body = null;
+        response.body = "ERRO AQUI";
 
     }
 

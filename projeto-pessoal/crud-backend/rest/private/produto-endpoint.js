@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const service = require('../../service/produto-service');
-const httpStatus = require('../../utils/http-status');
 
 // cria um produto
 router.post('/', async (req, res) => {
