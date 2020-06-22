@@ -1,3 +1,5 @@
+const express = require('express');
+const router = express.Router();
 const httpStatus = require('../../utils/http-status');
 const service = require('../../service/produto-service');
 
@@ -21,3 +23,5 @@ router.get('/', async (req, res) => {
 
   res.status(306).send("TESTE DE ENDPOINT");
 })
+
+module.exports = router
