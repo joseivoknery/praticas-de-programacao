@@ -25,11 +25,11 @@ const removerProduto = async (id, callback) => {
 
 };
 
-const inicializa = () => {
+const start = () => {
 
   let response = '';
 
-  axios.get(environments.localhost + environments.public + environments.produtos + environments.inicializa).then((res) => {
+  axios.get(environments.localhost + environments.start).then((res) => {
     response = res;
   });
 
@@ -58,7 +58,7 @@ const ProdutosService = {
   adicionarProduto,
   removerProduto,
   editarProduto,
-  inicializa
+  start
 };
 
 // Exportando o serviço

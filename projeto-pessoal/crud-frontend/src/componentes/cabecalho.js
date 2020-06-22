@@ -6,7 +6,7 @@ import ProdutosService from '../servicos/produtos_service';
 
 function Cabecalho() {
 
-  ProdutosService.inicializa();
+  ProdutosService.start();
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg" fixed="top">

@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
       mensagem = "Massa de Teste Já Inicializada!";
   }
 
-  res.status(306).send("TESTE DE ENDPOINT");
+  res.status(response).send(mensagem);
 })
 
 module.exports = router

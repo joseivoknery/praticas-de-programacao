@@ -8,7 +8,7 @@ const environments = {
     security: 'security/',
 
     produtos: 'produtos/',
-    inicializa: 'inicializa',
+    start: 'start',
     login: 'login/',
     signup: 'signup/'
   

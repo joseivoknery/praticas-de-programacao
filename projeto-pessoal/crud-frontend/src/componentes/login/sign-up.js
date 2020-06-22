@@ -76,6 +76,10 @@ export default function SignUp() {
     setUsuario({ ...usuario, [campo]: evento.target.value });
   };
 
+  const login = () =>{
+    history.push('/login');
+  }
+
   const submeter = (evento) => {
 
     evento.preventDefault();
@@ -191,15 +195,6 @@ export default function SignUp() {
               />
             </Grid>
 
-            {/* <Grid item xs={12}>
-           <FormLabel component="legend">Nível Acesso</FormLabel>
-            <RadioGroup row aria-label="nivel" name="nivel1"  value={usuario.nivel} onChange={(e) => setValor(e, 'nivel')} >
-              <FormControlLabel value="1" control={<Radio />} label="Admin" />
-              <FormControlLabel value="2" control={<Radio />} label="Cliente" />
-              <FormControlLabel value="0" control={<Radio />} label="Outros" />
-            </RadioGroup>
-            </Grid> */}
-
           </Grid>
           <Button
             type="submit"
@@ -212,7 +207,7 @@ export default function SignUp() {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="" variant="body2" onClick={() => login()} >
                 Você já tem uma Conta? Login!
               </Link>
             </Grid>
