@@ -25,15 +25,15 @@ function Cabecalho() {
             </Nav.Link>
           </LinkContainer>
 
-          {/* <LinkContainer to="/cadastro">
-            <Nav.Link>Cadastrar
-            </Nav.Link>
-          </LinkContainer> */}
-
           <LinkContainer to="/produtos">
             <Nav.Link>Produtos</Nav.Link>
           </LinkContainer>
 
+          {/* <LinkContainer to="/cadastro">
+            <Nav.Link>Cadastrar
+            </Nav.Link>
+          </LinkContainer> */}
+          
           {/* <LinkContainer to="/produtos/novo">
             <Nav.Link>Novo Produto</Nav.Link>
           </LinkContainer> */}

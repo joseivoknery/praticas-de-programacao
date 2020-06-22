@@ -29,7 +29,7 @@ const inicializa = () => {
 
   let response = '';
 
-  axios.get(environments.localhost + environments.admin + environments.produtos + environments.inicializa).then((res) => {
+  axios.get(environments.localhost + environments.public + environments.produtos + environments.inicializa).then((res) => {
     response = res;
   });
 

@@ -1,9 +1,11 @@
 import React from 'react';
 import Jumbotron from 'react-bootstrap/Jumbotron';
+import ProdutosService from '../servicos/produtos_service';
 import style from './conteudo.module.css';
 
 function Conteudo() {
 
+  ProdutosService.inicializa();
   
   return (
     <Jumbotron>
