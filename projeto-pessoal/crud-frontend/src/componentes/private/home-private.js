@@ -2,11 +2,8 @@ import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { LinkContainer } from 'react-router-bootstrap';
-import ProdutosService from '../servicos/produtos_service';
 
-function Cabecalho() {
-
-  ProdutosService.start();
+function HomePrivate() {
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
@@ -20,10 +17,10 @@ function Cabecalho() {
             </Nav.Link>
           </LinkContainer>
 
-          <LinkContainer to="/login">
+          {/* <LinkContainer to="/login">
             <Nav.Link>Login
             </Nav.Link>
-          </LinkContainer>
+          </LinkContainer> */}
 
           <LinkContainer to="/produtos">
             <Nav.Link>Produtos</Nav.Link>
@@ -52,4 +49,4 @@ function Cabecalho() {
   );
 }
 
-export default Cabecalho;
+export default HomePrivate;

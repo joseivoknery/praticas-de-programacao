@@ -2,7 +2,7 @@ import React from 'react';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import style from './conteudo.module.css';
 
-function Conteudo() {
+function ConteudoPrivado() {
 
   return (
     <Jumbotron>
@@ -16,9 +16,12 @@ function Conteudo() {
       <p>
         Aluno: José Ivo Koerich Nery 182.308.00-07
       </p>
+      <p>
+        Página de Acesso Privado!
+      </p>
     </Jumbotron>
     
   );
 }
 
-export default Conteudo;
+export default ConteudoPrivado;
