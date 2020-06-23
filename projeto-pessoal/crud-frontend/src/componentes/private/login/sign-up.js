@@ -32,7 +32,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   image: {
-    backgroundImage: 'url(https://www.estalagemdomirante.com.br/wp-content/uploads/2016/05/restaurante65-1024x683.jpg)',
+    backgroundImage: 'url(https://s3-sa-east-1.amazonaws.com/images-clients.agendaopen.com/47a1c75acf7c1ed10fe99809997bf50b_1.jpg)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'dark' ? theme.palette.grey[50] : theme.palette.grey[900],
