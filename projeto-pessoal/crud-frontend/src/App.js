@@ -1,26 +1,27 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Cabecalho from './componentes/cabecalho';
-import FormClientes from './componentes/clientes/form';
-import ListarClientes from './componentes/clientes/listar';
-import VisualizarClientes from './componentes/clientes/visualizar';
-import Conteudo from './componentes/conteudo';
 import SignInSide from './componentes/login/sign-in-side';
 import SignUp from './componentes/login/sign-up';
 import NaoEncontrada from './componentes/naoencontrada';
-import FormProdutos from './componentes/produtos/form';
+//import FormProdutos from './componentes/produtos/form';
 import ListarProdutos from './componentes/produtos/listar';
-import VisualizarProduto from './componentes/produtos/visualizar';
+//import FormClientes from './componentes/clientes/form';
+//import ListarClientes from './componentes/clientes/listar';
+//import VisualizarClientes from './componentes/clientes/visualizar';
+import ConteudoPublico from './componentes/public/conteudo-public';
+//import VisualizarProduto from './componentes/produtos/visualizar';
+//import Cabecalho from './componentes/cabecalho';
+import HomePublic from './componentes/public/home-public';
 
 function App() {
   return (
     <Router>
-      <Cabecalho/>
+      <HomePublic/>
       <Container>
         <Switch>
 
-        <Route path="/" exact={true}><Conteudo/></Route>
+        <Route path="/" exact={true}><ConteudoPublico/></Route>
 
           <Route path="/login" exact={true}><SignInSide/></Route>
 
@@ -30,7 +31,7 @@ function App() {
             <ListarProdutos/>
           </Route>
 
-          <Route path="/produtos/novo"><FormProdutos/></Route>
+          {/* <Route path="/produtos/novo"><FormProdutos/></Route>
           <Route path="/produtos/editar/:idProduto">
             <FormProdutos/>
           </Route>
@@ -50,7 +51,7 @@ function App() {
 
           <Route path="/clientes/:idCliente">
             <VisualizarClientes/>
-          </Route>
+          </Route> */}
 
           <Route path="*"><NaoEncontrada/></Route>
 
