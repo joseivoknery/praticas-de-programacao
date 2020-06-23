@@ -1,8 +1,6 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import SignInSide from './componentes/login/sign-in-side';
-import SignUp from './componentes/login/sign-up';
 import NaoEncontrada from './componentes/naoencontrada';
 //import FormProdutos from './componentes/produtos/form';
 import ListarProdutos from './componentes/produtos/listar';
@@ -13,6 +11,8 @@ import ConteudoPublico from './componentes/public/conteudo-public';
 //import VisualizarProduto from './componentes/produtos/visualizar';
 //import Cabecalho from './componentes/cabecalho';
 import HomePublic from './componentes/public/home-public';
+import SignInSide from './componentes/public/login/sign-in-side';
+import SignUp from './componentes/public/login/sign-up';
 
 function App() {
   return (
