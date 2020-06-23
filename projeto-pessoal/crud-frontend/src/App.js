@@ -1,18 +1,14 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import NaoEncontrada from './componentes/naoencontrada';
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 //import FormProdutos from './componentes/produtos/form';
-import ListarProdutos from './componentes/produtos/listar';
 //import FormClientes from './componentes/clientes/form';
 //import ListarClientes from './componentes/clientes/listar';
 //import VisualizarClientes from './componentes/clientes/visualizar';
-import ConteudoPublico from './componentes/public/conteudo-public';
 //import VisualizarProduto from './componentes/produtos/visualizar';
-//import Cabecalho from './componentes/cabecalho';
 import HomePublic from './componentes/public/home-public';
-import SignInSide from './componentes/public/login/sign-in-side';
-import SignUp from './componentes/public/login/sign-up';
+import RotasPublicas from './componentes/public/rotas-publicas';
+
 
 function App() {
   return (
@@ -20,16 +16,7 @@ function App() {
       <HomePublic/>
       <Container>
         <Switch>
-
-        <Route path="/" exact={true}><ConteudoPublico/></Route>
-
-          <Route path="/login" exact={true}><SignInSide/></Route>
-
-          <Route path="/cadastro" exact={true}><SignUp/></Route>
-
-          <Route path="/produtos/" exact={true}>
-            <ListarProdutos/>
-          </Route>
+          <RotasPublicas/>
 
           {/* <Route path="/produtos/novo"><FormProdutos/></Route>
           <Route path="/produtos/editar/:idProduto">
@@ -53,8 +40,7 @@ function App() {
             <VisualizarClientes/>
           </Route> */}
 
-          <Route path="*"><NaoEncontrada/></Route>
-
+         
         </Switch>
       </Container>
     </Router>
