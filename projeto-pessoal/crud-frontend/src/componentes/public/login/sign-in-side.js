@@ -15,7 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
-import LoginService from '../../servicos/login-service';
+import LoginService from '../../../servicos/login-service';
 
 function Copyright() {
   return (

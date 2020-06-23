@@ -2,9 +2,13 @@ import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -205,6 +209,16 @@ export default function SignUp() {
                 onChange={(e) => setValor(e, 'senha')}
               />
             </Grid>
+
+            <Grid item xs={12}>
+            <FormLabel component="legend">Nível Acesso</FormLabel>
+            <RadioGroup row aria-label="nivel" name="nivel1"  value={usuario.nivel} onChange={(e) => setValor(e, 'nivel')}>
+              <FormControlLabel value="1" control={<Radio />} label="Admin" />
+              <FormControlLabel value="2" control={<Radio />} label="Cliente" />
+              <FormControlLabel value="0" control={<Radio />} label="Outros" />
+            </RadioGroup>
+            </Grid>
+
 
             <Grid item xs={12}>
               <TextField
