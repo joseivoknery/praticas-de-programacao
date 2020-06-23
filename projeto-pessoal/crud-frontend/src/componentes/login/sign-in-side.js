@@ -91,6 +91,10 @@ export default function SignInSide() {
     setUsuario({ ...usuario, [campo]: evento.target.value });
   };
 
+  const mountToken = (valor, campo) => {
+    setToken({ ...token, [campo]: valor });
+  };
+
   const cadastrar = () =>{
     history.push('/cadastro');
   }
@@ -105,17 +109,19 @@ export default function SignInSide() {
 
       if(response.data.body.auth){
         console.log(response.data.mensagem)
-        token.x_access_token = response.data.body.token;
-        token.authorization = response.data.body.token;
-        LoginService.autenticar(token, async (retorno) => {
+      
+        mountToken(response.data.body.token, 'x_access_token');
+        mountToken(response.data.body.token, 'authorization');
 
-          if(retorno.data.body.auth){
-            console.log(retorno.data.mensagem)
-            token.x_access_token = retorno.data.body.token;
-            token.authorization = retorno.data.body.token;
+        LoginService.autenticar(token, async (res) => {
+
+          if(res.data.body.auth){
+            console.log(res.data.mensagem)
+            mountToken(response.data.body.token, 'x_access_token');
+            mountToken(response.data.body.token, 'authorization');
           }
           else{
-            console.log(retorno.data.mensagem)
+            console.log(res.data.mensagem)
           }
         });
       }

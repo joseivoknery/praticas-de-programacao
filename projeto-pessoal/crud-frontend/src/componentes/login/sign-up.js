@@ -70,6 +70,21 @@ export default function SignUp() {
     };
   };
 
+  const AUTH_TOKEN = () => {
+    return {
+      x_access_token: "",
+      authorization: ""
+    };
+  };
+
+  const [token, setToken] = useState(AUTH_TOKEN());
+
+  let mensagem = "";
+
+  const mountToken = (valor, campo) => {
+    setToken({ ...token, [campo]: valor });
+  };
+
   const [usuario, setUsuario] = useState(CADASTRAR());
 
   const setValor = (evento, campo) => {
@@ -85,6 +100,30 @@ export default function SignUp() {
     evento.preventDefault();
 
     LoginService.signup(usuario, async (retorno) => {
+      
+      const response = await retorno;
+
+      if(response.data.body.auth){
+        console.log(response.data.mensagem)
+        mountToken(response.data.body.token, 'x_access_token');
+        mountToken(response.data.body.token, 'authorization');
+        LoginService.autenticar(token, async (res) => {
+
+          if(res.data.body.auth){
+            console.log(res.data.mensagem)
+            mountToken(response.data.body.token, 'x_access_token');
+            mountToken(response.data.body.token, 'authorization');
+          }
+          else{
+            console.log(res.data.mensagem)
+          }
+        });
+      }
+      else{
+        console.log(response.data.mensagem)
+      }
+
+      mensagem = response.data.mensagem;
       
       history.push('/');
 
@@ -202,6 +241,7 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={(e) => submeter(e)}
           >
             Cadastrar
           </Button>
@@ -217,6 +257,7 @@ export default function SignUp() {
       <Box mt={5}>
         <Copyright />
       </Box>
+      <h5> {mensagem} </h5>
       </Grid>
     </Grid>
   );
