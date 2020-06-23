@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import FormProdutos from '../../componentes/produtos/form';
 import ListarProdutos from '../../componentes/produtos/listar';
 import VisualizarProdutos from '../../componentes/produtos/visualizar';
+import NiveisAcesso from '../../utils/nivel';
 import NaoEncontrada from '../naoencontrada';
 import ConteudoPrivado from '../private/conteudo-private';
 import SignUpPrivado from '../private/login/sign-up';
@@ -12,8 +13,21 @@ import SignUpPrivado from '../private/login/sign-up';
 function RotasPrivadas() {
 
 
-  const liberadorRotasPorNivelAcesso = (acesso) =>{
+  const liberadorRotasPorNivelAcesso = (nivel) =>{
 
+    if(nivel === NiveisAcesso.ADMIN){
+
+      return "A";
+
+    }
+    else if(nivel === NiveisAcesso.CLIENTE){
+
+      return "B";
+
+    }
+    else{
+      return "C";
+    }
     
 
   }
