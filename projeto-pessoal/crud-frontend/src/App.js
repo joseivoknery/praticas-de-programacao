@@ -16,31 +16,7 @@ function App() {
       <HomePublic/>
       <Container>
         <Switch>
-          <RotasPublicas/>
-
-          {/* <Route path="/produtos/novo"><FormProdutos/></Route>
-          <Route path="/produtos/editar/:idProduto">
-            <FormProdutos/>
-          </Route>
-
-          <Route path="/produtos/:idProduto">
-            <VisualizarProduto/>
-          </Route>
-
-          <Route path="/clientes/" exact={true}>
-            <ListarClientes/>
-          </Route>
-
-          <Route path="/clientes/novo"><FormClientes/></Route>
-          <Route path="/clientes/editar/:idCliente">
-            <FormClientes/>
-          </Route>
-
-          <Route path="/clientes/:idCliente">
-            <VisualizarClientes/>
-          </Route> */}
-
-         
+          <RotasPublicas/>         
         </Switch>
       </Container>
     </Router>

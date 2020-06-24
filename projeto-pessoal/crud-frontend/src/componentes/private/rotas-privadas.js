@@ -5,68 +5,57 @@ import FormProdutos from '../../componentes/produtos/form';
 import ListarProdutos from '../../componentes/produtos/listar';
 import VisualizarProdutos from '../../componentes/produtos/visualizar';
 import NiveisAcesso from '../../utils/nivel';
-import NaoEncontrada from '../naoencontrada';
 import ConteudoPrivado from '../private/conteudo-private';
 import SignUpPrivado from '../private/login/sign-up';
 
+function RotasPrivadas(acesso) {
 
-function RotasPrivadas() {
+  const liberadorRotasPorNivelAcesso = (nivel) => {
 
+    if (nivel === NiveisAcesso.ADMIN) {
 
-  const liberadorRotasPorNivelAcesso = (nivel) =>{
+      return (
+        <>
+          <Route path="/private/cadastro" exact={true}>
+            <SignUpPrivado />
+          </Route>
 
-    if(nivel === NiveisAcesso.ADMIN){
+          <Route path="/produtos/novo">
+            <FormProdutos />
+          </Route>
+          <Route path="/produtos/editar/:idProduto">
+            <FormProdutos />
+          </Route>
 
-      return "A";
-
+          <Route path="/produtos/:idProduto">
+            <VisualizarProdutos />
+          </Route>
+        </>
+      );
+      
+    } else if (nivel === NiveisAcesso.CLIENTE) {
+      return 'B';
+    } else {
+      return 'C';
     }
-    else if(nivel === NiveisAcesso.CLIENTE){
-
-      return "B";
-
-    }
-    else{
-      return "C";
-    }
-    
-
-  }
+  };
 
   return (
     <Container>
-
       <Switch>
         <Route path="/private/" exact={true}>
           <ConteudoPrivado />
-        </Route>
-
-        <Route path="/private/cadastro" exact={true}>
-          <SignUpPrivado />
         </Route>
 
         <Route path="/produtos/" exact={true}>
           <ListarProdutos />
         </Route>
 
-        <Route path="/produtos/novo"><FormProdutos/></Route>
-          <Route path="/produtos/editar/:idProduto">
-            <FormProdutos/>
-          </Route>
-
-          <Route path="/produtos/:idProduto">
-            <VisualizarProdutos/>
-          </Route>
-
-        <Route path="*">
-          <NaoEncontrada />
-        </Route>
+        {liberadorRotasPorNivelAcesso(acesso)}
 
       </Switch>
-      
     </Container>
   );
-
-
 }
 
 export default RotasPrivadas;
