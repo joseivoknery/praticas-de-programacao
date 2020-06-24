@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import ProdutosService from '../../../servicos/produtos_service';
 
 
-function VisualizarProduto() {
+function VisualizarProdutoPublico() {
   const {idProduto} = useParams();
   // const history = useHistory();
   const [produto, setProduto] = useState({});
@@ -53,4 +53,4 @@ function VisualizarProduto() {
   );
 }
 
-export default VisualizarProduto;
+export default VisualizarProdutoPublico;

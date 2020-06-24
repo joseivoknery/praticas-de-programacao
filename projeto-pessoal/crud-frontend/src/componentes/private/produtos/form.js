@@ -35,11 +35,11 @@ function FormProdutos() {
     evento.preventDefault();
     if (idProduto === undefined) {
       ProdutosService.adicionarProduto(form, () => {
-        history.push('/produtos');
+        history.push('/admin/produtos');
       });
     } else {
       ProdutosService.editarProduto(idProduto, form, () => {
-        history.push('/produtos');
+        history.push('/admin/produtos');
       });
     }
   };

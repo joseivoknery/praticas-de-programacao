@@ -16,15 +16,15 @@ function RotasPublicas() {
           <ConteudoPublico />
         </Route>
 
-        <Route path="/login" exact={true}>
+        <Route path="/public/login" exact={true}>
           <SignInSide />
         </Route>
 
-        <Route path="/cadastro" exact={true}>
+        <Route path="/public/cadastro" exact={true}>
           <SignUp />
         </Route>
 
-        <Route path="/produtos/" exact={true}>
+        <Route path="/public/produtos/" exact={true}>
           <ListarProdutos />
         </Route>
 

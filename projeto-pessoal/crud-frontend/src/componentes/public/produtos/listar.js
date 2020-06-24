@@ -6,7 +6,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import ProdutosService from '../../../servicos/produtos_service';
 
 
-function ListarProdutos() {
+function ListarProdutosPublico() {
   const [produtos, setProdutos] = useState([]);  
 
 useEffect(() => {
@@ -38,4 +38,4 @@ useEffect(() => {
   );
 }
 
-export default ListarProdutos;
+export default ListarProdutosPublico;

@@ -5,15 +5,15 @@ import { useHistory, useParams } from "react-router-dom";
 import ProdutosService from '../../../servicos/produtos_service';
 
 
-function VisualizarProduto() {
+function VisualizarProdutoPrivado() {
   const {idProduto} = useParams();
   const history = useHistory();
   const [produto, setProduto] = useState({});
 
   useEffect(() => {
 
-    ProdutosService.getProduto(idProduto).then((produto) => {
-      setProduto(produto);
+    ProdutosService.getProduto(idProduto).then((prods) => {
+      setProduto(prods);
     });
 
   }, [idProduto]);
@@ -29,7 +29,7 @@ function VisualizarProduto() {
   const removerProduto = (evento, id) => {
     evento.preventDefault();
     ProdutosService.removerProduto(id, () => {
-      history.push('/produtos');
+      history.push('/admin/produtos');
     });
   };
 
@@ -52,4 +52,4 @@ function VisualizarProduto() {
   );
 }
 
-export default VisualizarProduto;
+export default VisualizarProdutoPrivado;
