@@ -91,7 +91,7 @@ export default function SignUp() {
   };
 
   const login = () =>{
-    history.push('/login');
+    history.push('/public/login');
   }
 
   const submeter = (evento) => {

@@ -1,6 +1,5 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import NaoEncontrada from '../naoencontrada';
 import ConteudoPublico from './conteudo-public';
 import SignInSide from './login/sign-in-side';
@@ -9,9 +8,7 @@ import ListarProdutos from './produtos/listar';
 
 function RotasPublicas() {
   return (
-    <Container>
-
-      <Switch>
+    <>
         <Route path="/" exact={true}>
           <ConteudoPublico />
         </Route>
@@ -32,9 +29,7 @@ function RotasPublicas() {
           <NaoEncontrada />
         </Route>
 
-      </Switch>
-      
-    </Container>
+    </>
   );
 }
 

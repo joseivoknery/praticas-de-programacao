@@ -1,6 +1,5 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import FormProdutos from '../../componentes/private/produtos/form';
 import ListarProdutosPrivados from '../../componentes/private/produtos/listar';
 import VisualizarProdutosPrivados from '../../componentes/private/produtos/visualizar';
@@ -19,7 +18,7 @@ function RotasPrivadas(acesso) {
             <SignUpPrivado />
           </Route>
 
-          <Route path="/private/produtos/" exact={true}>
+          <Route path="/admin/produtos/" exact={true}>
             <ListarProdutosPrivados />
           </Route>
 
@@ -54,15 +53,13 @@ function RotasPrivadas(acesso) {
   };
 
   return (
-    <Container>
-      <Switch>
-        <Route path="/access/" exact={true}>
+    <>
+        <Route path="/access" exact={true}>
           <ConteudoPrivado />
         </Route>
 
         {liberadorRotasPorNivelAcesso(acesso)}
-      </Switch>
-    </Container>
+    </>
   );
 }
 

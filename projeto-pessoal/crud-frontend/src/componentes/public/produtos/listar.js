@@ -23,7 +23,7 @@ useEffect(() => {
         <Card.Img variant="top" src={produto.foto} />
         <Card.Body>
           <Card.Title>{produto.nome}</Card.Title>
-          <LinkContainer to={"/produtos/" + produto._id}>
+          <LinkContainer to={"client/produtos/" + produto._id}>
             <Button variant="primary" block>Visualizar</Button>
           </LinkContainer>
         </Card.Body>

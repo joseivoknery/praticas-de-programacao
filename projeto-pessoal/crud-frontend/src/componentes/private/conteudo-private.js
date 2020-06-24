@@ -1,6 +1,6 @@
 import React from 'react';
 import Jumbotron from 'react-bootstrap/Jumbotron';
-import style from './conteudo.module.css';
+import style from './conteudo-private.module.css';
 
 function ConteudoPrivado() {
 

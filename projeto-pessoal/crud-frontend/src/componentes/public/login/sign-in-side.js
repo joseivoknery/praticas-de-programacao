@@ -16,6 +16,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import LoginService from '../../../servicos/login-service';
+import Acesso from '../../../utils/acesso';
 
 function Copyright() {
   return (
@@ -96,7 +97,7 @@ export default function SignInSide() {
   };
 
   const cadastrar = () =>{
-    history.push('/cadastro');
+    history.push('/public/cadastro');
   }
 
   const submeter = (evento) => {
@@ -131,7 +132,9 @@ export default function SignInSide() {
 
       mensagem = response.data.mensagem;
       
-      history.push('/');
+      Acesso.acesso = response.nivel;
+
+      history.push('/access');
 
     });
     

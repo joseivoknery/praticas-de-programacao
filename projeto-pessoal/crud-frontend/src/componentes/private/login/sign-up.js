@@ -15,7 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
-import LoginService from '../../servicos/login-service';
+import LoginService from '../../../servicos/login-service';
 
 function Copyright() {
   return (
@@ -96,7 +96,7 @@ export default function SignUpPrivado() {
   };
 
   const login = () =>{
-    history.push('/login');
+    history.push('/public/login');
   }
 
   const submeter = (evento) => {
@@ -129,7 +129,7 @@ export default function SignUpPrivado() {
 
       mensagem = response.data.mensagem;
       
-      history.push('/');
+      history.push('/acess');
 
     });
     

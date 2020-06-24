@@ -20,12 +20,12 @@ function HomePublic() {
             </Nav.Link>
           </LinkContainer>
 
-          <LinkContainer to="/login">
+          <LinkContainer to="/public/login">
             <Nav.Link>Login
             </Nav.Link>
           </LinkContainer>
 
-          <LinkContainer to="/produtos">
+          <LinkContainer to="/public/produtos/">
             <Nav.Link>Menu</Nav.Link>
           </LinkContainer>
 
