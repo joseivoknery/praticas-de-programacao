@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from "react-router-dom";
-import ProdutosService from '../../servicos/produtos_service';
-
-import Form from 'react-bootstrap/Form';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { useHistory, useParams } from "react-router-dom";
+import ProdutosService from '../../../servicos/produtos_service';
+
 
 function FormProdutos() {
   const criaFormEmBranco = () => {

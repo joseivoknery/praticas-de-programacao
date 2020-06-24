@@ -2,10 +2,10 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import { Route, Switch } from 'react-router-dom';
 import NaoEncontrada from '../naoencontrada';
-import ListarProdutos from '../produtos/listar';
 import ConteudoPublico from './conteudo-public';
 import SignInSide from './login/sign-in-side';
 import SignUp from './login/sign-up';
+import ListarProdutos from './produtos/listar';
 
 function RotasPublicas() {
   return (

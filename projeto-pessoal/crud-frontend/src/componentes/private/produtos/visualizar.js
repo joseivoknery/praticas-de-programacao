@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useHistory, useParams } from "react-router-dom";
-import ProdutosService from '../../servicos/produtos_service';
+import ProdutosService from '../../../servicos/produtos_service';
 
 
 function VisualizarProduto() {

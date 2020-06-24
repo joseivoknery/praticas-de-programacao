@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
-import { LinkContainer } from 'react-router-bootstrap';
-import { useHistory, useParams } from "react-router-dom";
-import ProdutosService from '../../servicos/produtos_service';
+// import { LinkContainer } from 'react-router-bootstrap';
+// import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import ProdutosService from '../../../servicos/produtos_service';
 
 
 function VisualizarProduto() {
   const {idProduto} = useParams();
-  const history = useHistory();
+  // const history = useHistory();
   const [produto, setProduto] = useState({});
 
   useEffect(() => {
 
-    ProdutosService.getProduto(idProduto).then((produto) => {
-      setProduto(produto);
+    ProdutosService.getProduto(idProduto).then((prod) => {
+      setProduto(prod);
     });
 
   }, [idProduto]);
@@ -26,12 +27,12 @@ function VisualizarProduto() {
     return 'R$ 0,00';
   };
   
-  const removerProduto = (evento, id) => {
-    evento.preventDefault();
-    ProdutosService.removerProduto(id, () => {
-      history.push('/produtos');
-    });
-  };
+  // const removerProduto = (evento, id) => {
+  //   evento.preventDefault();
+  //   ProdutosService.removerProduto(id, () => {
+  //     history.push('/produtos');
+  //   });
+  // };
 
   return (
     <Card className="detalheProduto">
@@ -42,12 +43,12 @@ function VisualizarProduto() {
           Preço: {formataDinheiro(produto.valor)}
         </Card.Text>
       </Card.Body>
-      <Card.Body>
+      {/* <Card.Body>
         <LinkContainer to={'/produtos/editar/' + produto._id}>
           <Card.Link className="btn btn-primary" href="#">Editar</Card.Link>
         </LinkContainer>
         <Card.Link onClick={(e) => removerProduto(e, produto._id)} className="btn btn-danger" href="#">Remover</Card.Link>
-      </Card.Body>        
+      </Card.Body>         */}
     </Card>
   );
 }
